@@ -1,0 +1,457 @@
+#%RAML 0.8
+title: Person API Group
+version: 1.0
+documentation:
+- title: Person API Group
+  content: "# Person API Group Functional Summary #\n\nThe Person API Group creates and updates records for end user accounts. A prerequisite to creating a person record is the Organization ID for the organization to which the person belongs. A global Person ID (CUID) is returned when a person is created. The Person ID will be required for any actions performed for a specific user.\n\n+ Sample Organization ID:  MYCOMPANY-DEMO123456\n+ Sample Person ID: DYKGC1a8\n\n### The Person Record ###\n\nThe person record contains the following information:\n\n+ Demographics such as name, address, phone numbers, timezone, preferred language and email address\n+ Administrative data such as account status and organization to which they belong\n+ Service packages granted to the user and the users organization\n+ Security data such as authentication domain, username, password, and security questions\n+ An optional template of custom attributes\n\n### Other Functions ###\n\nOther functions performed by the Person API:\n\n+ Generates email invitations to register with an optional unique invitationCode\n+ Registration\n    + Registers a user with person record in pending status \n    + Approves or denies a registration request\n+ Validation \n    + Validates the email address and/or username exists in the database \n    + Validates that passwords comply with password policies\n+ Activates/Suspends/Unsuspends user accounts\n+ Retrieves OIDC claim for a person to complete Open Id Connect (OIDC) Authorization. Query parameters are populated by Apigee gateway."
+baseUri: https://api.us1.covisint.com/person/v3
+baseUriParameters: {}
+/userInfo:
+  get:
+    displayName: /userInfo
+    description: 'TODO: Add Description'
+    responses: {}
+    queryParameters:
+      scope:
+        type: string
+        example: ''
+        required: true
+        displayName: scope
+/persons:
+  /count:
+    get:
+      displayName: /persons/count
+      description: 'TODO: Add Description'
+      responses: {}
+      queryParameters:
+        id:
+          type: string
+          example: ''
+          required: true
+          displayName: id
+        organization.id:
+          type: string
+          example: ''
+          required: true
+          displayName: organization.id
+        username:
+          type: string
+          example: ''
+          required: true
+          displayName: username
+        authnDomain:
+          type: string
+          example: ''
+          required: true
+          displayName: authnDomain
+        name.given:
+          type: string
+          example: ''
+          required: true
+          displayName: name.given
+        name.surname:
+          type: string
+          example: ''
+          required: true
+          displayName: name.surname
+        email:
+          type: string
+          example: ''
+          required: true
+          displayName: email
+  /roles/:personId:
+    get:
+      displayName: /persons/roles/:personId
+      description: 'TODO: Add Description'
+      responses: {}
+  /registration:
+    /status:
+      post:
+        displayName: /persons/registration/status
+        description: 'TODO: Add Description'
+        responses: {}
+        headers:
+          SolutionInstanceId:
+            type: string
+            example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+            required: true
+            displayName: SolutionInstanceId
+    /validate:
+      post:
+        displayName: /persons/registration/validate
+        description: 'TODO: Add Description'
+        responses: {}
+        headers:
+          SolutionInstanceId:
+            type: string
+            example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+            required: true
+            displayName: SolutionInstanceId
+        queryParameters:
+          emailAddress:
+            type: string
+            example: ''
+            required: true
+            displayName: emailAddress
+          userName:
+            type: string
+            example: ''
+            required: true
+            displayName: userName
+    post:
+      displayName: /persons/registration
+      description: 'TODO: Add Description'
+      responses: {}
+      headers:
+        SolutionInstanceId:
+          type: string
+          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+          required: true
+          displayName: SolutionInstanceId
+  /:personId:
+    /accounts/password:
+      put:
+        displayName: /persons/:personId/accounts/password
+        description: 'TODO: Add Description'
+        responses: {}
+      get:
+        displayName: /persons/:personId/accounts/password
+        description: 'TODO: Add Description'
+        responses: {}
+    /templates:
+      put:
+        displayName: /persons/:personId/templates
+        description: 'TODO: Add Description'
+        responses: {}
+      delete:
+        displayName: /persons/:personId/templates
+        description: 'TODO: Add Description'
+        responses: {}
+        queryParameters:
+          id:
+            type: string
+            example: ''
+            required: true
+            displayName: id
+      get:
+        displayName: /persons/:personId/templates
+        description: 'TODO: Add Description'
+        responses: {}
+    get:
+      displayName: /persons/:personId
+      description: 'TODO: Add Description'
+      responses: {}
+    put:
+      displayName: /persons/:personId
+      description: 'TODO: Add Description'
+      responses: {}
+  /password/validate:
+    post:
+      displayName: /persons/password/validate
+      description: 'TODO: Add Description'
+      responses: {}
+      headers:
+        SolutionInstanceId:
+          type: string
+          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+          required: true
+          displayName: SolutionInstanceId
+  /organizations/:organizationId/securityAdmins:
+    get:
+      displayName: /persons/organizations/:organizationId/securityAdmins
+      description: 'TODO: Add Description'
+      responses: {}
+      queryParameters:
+        page:
+          type: string
+          example: ''
+          required: true
+          displayName: page
+        pageSize:
+          type: string
+          example: ''
+          required: true
+          displayName: pageSize
+  /tasks:
+    /activate:
+      post:
+        displayName: /persons/tasks/activate
+        description: 'TODO: Add Description'
+        responses: {}
+        queryParameters:
+          personId:
+            type: string
+            example: ''
+            required: true
+            displayName: personId
+    /suspend:
+      post:
+        displayName: /persons/tasks/suspend
+        description: 'TODO: Add Description'
+        responses: {}
+        queryParameters:
+          personId:
+            type: string
+            example: ''
+            required: true
+            displayName: personId
+    /unsuspend:
+      post:
+        displayName: /persons/tasks/unsuspend
+        description: 'TODO: Add Description'
+        responses: {}
+        queryParameters:
+          personId:
+            type: string
+            example: ''
+            required: true
+            displayName: personId
+  get:
+    displayName: /persons
+    description: 'TODO: Add Description'
+    responses: {}
+    queryParameters:
+      page:
+        type: string
+        example: ''
+        required: true
+        displayName: page
+      pageSize:
+        type: string
+        example: ''
+        required: true
+        displayName: pageSize
+      id:
+        type: string
+        example: ''
+        required: true
+        displayName: id
+      organization.id:
+        type: string
+        example: ''
+        required: true
+        displayName: organization.id
+      username:
+        type: string
+        example: ''
+        required: true
+        displayName: username
+      authnDomain:
+        type: string
+        example: ''
+        required: true
+        displayName: authnDomain
+      name.given:
+        type: string
+        example: ''
+        required: true
+        displayName: name.given
+      name.surname:
+        type: string
+        example: ''
+        required: true
+        displayName: name.surname
+      email:
+        type: string
+        example: ''
+        required: true
+        displayName: email
+      securityadmin:
+        type: string
+        example: ''
+        required: true
+        displayName: securityadmin
+      roleId:
+        type: string
+        example: ''
+        required: true
+        displayName: roleId
+      roleName:
+        type: string
+        example: ''
+        required: true
+        displayName: roleName
+      fullName:
+        type: string
+        example: ''
+        required: true
+        displayName: fullName
+      isRolesGranted:
+        type: string
+        example: ''
+        required: true
+        displayName: isRolesGranted
+  post:
+    displayName: /persons
+    description: 'TODO: Add Description'
+    responses: {}
+/personInvitations:
+  /:invitationId:
+    /servicePackages:
+      /:packageId:
+        /codes:
+          get:
+            displayName: /personInvitations/:invitationId/servicePackages/:packageId/codes
+            description: 'TODO: Add Description'
+            responses: {}
+          put:
+            displayName: /personInvitations/:invitationId/servicePackages/:packageId/codes
+            description: 'TODO: Add Description'
+            responses: {}
+          delete:
+            displayName: /personInvitations/:invitationId/servicePackages/:packageId/codes
+            description: 'TODO: Add Description'
+            responses: {}
+        put:
+          displayName: /personInvitations/:invitationId/servicePackages/:packageId
+          description: 'TODO: Add Description'
+          responses: {}
+        delete:
+          displayName: /personInvitations/:invitationId/servicePackages/:packageId
+          description: 'TODO: Add Description'
+          responses: {}
+      get:
+        displayName: /personInvitations/:invitationId/servicePackages
+        description: 'TODO: Add Description'
+        responses: {}
+    get:
+      displayName: /personInvitations/:invitationId
+      description: 'TODO: Add Description'
+      responses: {}
+      headers:
+        SolutionInstanceId:
+          type: string
+          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+          required: true
+          displayName: SolutionInstanceId
+  /tasks/accept:
+    post:
+      displayName: /personInvitations/tasks/accept
+      description: 'TODO: Add Description'
+      responses: {}
+      headers:
+        SolutionInstanceId:
+          type: string
+          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+          required: true
+          displayName: SolutionInstanceId
+      queryParameters:
+        inviteId:
+          type: string
+          example: ''
+          required: true
+          displayName: inviteId
+        createdPersonId:
+          type: string
+          example: ''
+          required: true
+          displayName: createdPersonId
+  get:
+    displayName: /personInvitations
+    description: 'TODO: Add Description'
+    responses: {}
+    queryParameters:
+      page:
+        type: string
+        example: ''
+        required: true
+        displayName: page
+      pageSize:
+        type: string
+        example: ''
+        required: true
+        displayName: pageSize
+      invitor.id:
+        type: string
+        example: ''
+        required: true
+        displayName: invitor.id
+      invitee.id:
+        type: string
+        example: ''
+        required: true
+        displayName: invitee.id
+  post:
+    displayName: /personInvitations
+    description: 'TODO: Add Description'
+    responses: {}
+/requests:
+  /:requestId:
+    get:
+      displayName: /requests/:requestId
+      description: 'TODO: Add Description'
+      responses: {}
+      headers:
+        SolutionInstanceId:
+          type: string
+          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+          required: true
+          displayName: SolutionInstanceId
+    delete:
+      displayName: /requests/:requestId
+      description: 'TODO: Add Description'
+      responses: {}
+  /tasks:
+    /approve:
+      post:
+        displayName: /requests/tasks/approve
+        description: 'TODO: Add Description'
+        responses: {}
+        queryParameters:
+          requestId:
+            type: string
+            example: ''
+            required: true
+            displayName: requestId
+    /deny:
+      post:
+        displayName: /requests/tasks/deny
+        description: 'TODO: Add Description'
+        responses: {}
+        queryParameters:
+          requestId:
+            type: string
+            example: ''
+            required: true
+            displayName: requestId
+          reason:
+            type: string
+            example: ''
+            required: true
+            displayName: reason
+  get:
+    displayName: /requests
+    description: 'TODO: Add Description'
+    responses: {}
+    headers:
+      SolutionInstanceId:
+        type: string
+        example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+        required: true
+        displayName: SolutionInstanceId
+    queryParameters:
+      page:
+        type: string
+        example: ''
+        required: true
+        displayName: page
+      pageSize:
+        type: string
+        example: ''
+        required: true
+        displayName: pageSize
+      registrant.id:
+        type: string
+        example: ''
+        required: true
+        displayName: registrant.id
+  post:
+    displayName: /requests
+    description: 'TODO: Add Description'
+    responses: {}
+    headers:
+      SolutionInstanceId:
+        type: string
+        example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+        required: true
+        displayName: SolutionInstanceId
