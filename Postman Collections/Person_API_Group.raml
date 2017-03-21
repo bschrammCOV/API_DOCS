@@ -114,34 +114,12 @@ baseUriParameters: {}
         displayName: /persons/:personId/accounts/password
         description: 'TODO: Add Description'
         responses: {}
-      get:
-        displayName: /persons/:personId/accounts/password
-        description: 'TODO: Add Description'
-        responses: {}
     /templates:
       put:
         displayName: /persons/:personId/templates
         description: 'TODO: Add Description'
         responses: {}
-      delete:
-        displayName: /persons/:personId/templates
-        description: 'TODO: Add Description'
-        responses: {}
-        queryParameters:
-          id:
-            type: string
-            example: ''
-            required: true
-            displayName: id
-      get:
-        displayName: /persons/:personId/templates
-        description: 'TODO: Add Description'
-        responses: {}
     get:
-      displayName: /persons/:personId
-      description: 'TODO: Add Description'
-      responses: {}
-    put:
       displayName: /persons/:personId
       description: 'TODO: Add Description'
       responses: {}
@@ -281,10 +259,6 @@ baseUriParameters: {}
         example: ''
         required: true
         displayName: isRolesGranted
-  post:
-    displayName: /persons
-    description: 'TODO: Add Description'
-    responses: {}
 /personInvitations:
   /:invitationId:
     /servicePackages:
@@ -294,19 +268,7 @@ baseUriParameters: {}
             displayName: /personInvitations/:invitationId/servicePackages/:packageId/codes
             description: 'TODO: Add Description'
             responses: {}
-          put:
-            displayName: /personInvitations/:invitationId/servicePackages/:packageId/codes
-            description: 'TODO: Add Description'
-            responses: {}
-          delete:
-            displayName: /personInvitations/:invitationId/servicePackages/:packageId/codes
-            description: 'TODO: Add Description'
-            responses: {}
         put:
-          displayName: /personInvitations/:invitationId/servicePackages/:packageId
-          description: 'TODO: Add Description'
-          responses: {}
-        delete:
           displayName: /personInvitations/:invitationId/servicePackages/:packageId
           description: 'TODO: Add Description'
           responses: {}
@@ -371,10 +333,6 @@ baseUriParameters: {}
         example: ''
         required: true
         displayName: invitee.id
-  post:
-    displayName: /personInvitations
-    description: 'TODO: Add Description'
-    responses: {}
 /requests:
   /:requestId:
     get:
@@ -387,10 +345,6 @@ baseUriParameters: {}
           example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
           required: true
           displayName: SolutionInstanceId
-    delete:
-      displayName: /requests/:requestId
-      description: 'TODO: Add Description'
-      responses: {}
   /tasks:
     /approve:
       post:
@@ -445,13 +399,3 @@ baseUriParameters: {}
         example: ''
         required: true
         displayName: registrant.id
-  post:
-    displayName: /requests
-    description: 'TODO: Add Description'
-    responses: {}
-    headers:
-      SolutionInstanceId:
-        type: string
-        example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-        required: true
-        displayName: SolutionInstanceId
