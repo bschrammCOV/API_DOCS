@@ -235,6 +235,25 @@ baseUriParameters: {}
             default: ''
             required: true
             displayName: Content-Type
+      get:
+        displayName: /persons/:personId/accounts/password
+        description: 'TODO: Add Description'
+        responses: {}
+        headers:
+          Authorization:
+            description: ''
+            type: string
+            example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+            default: ''
+            required: true
+            displayName: Authorization
+          Accept:
+            description: ''
+            type: string
+            example: application/vnd.com.covisint.platform.person.account.password.v1+json
+            default: ''
+            required: true
+            displayName: Accept
     /templates:
       put:
         displayName: /persons/:personId/templates
@@ -262,6 +281,52 @@ baseUriParameters: {}
             default: ''
             required: true
             displayName: Content-Type
+      delete:
+        displayName: /persons/:personId/templates
+        description: 'TODO: Add Description'
+        responses: {}
+        headers:
+          Authorization:
+            description: ''
+            type: string
+            example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+            default: ''
+            required: true
+            displayName: Authorization
+          Accept:
+            description: ''
+            type: string
+            example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
+            default: ''
+            required: true
+            displayName: Accept
+        queryParameters:
+          id:
+            description: ''
+            type: string
+            example: ''
+            default: ''
+            required: true
+            displayName: id
+      get:
+        displayName: /persons/:personId/templates
+        description: 'TODO: Add Description'
+        responses: {}
+        headers:
+          Authorization:
+            description: ''
+            type: string
+            example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+            default: ''
+            required: true
+            displayName: Authorization
+          Accept:
+            description: ''
+            type: string
+            example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
+            default: ''
+            required: true
+            displayName: Accept
     get:
       displayName: /persons/:personId
       description: 'TODO: Add Description'
@@ -281,6 +346,32 @@ baseUriParameters: {}
           default: ''
           required: true
           displayName: Accept
+    put:
+      displayName: /persons/:personId
+      description: 'TODO: Add Description'
+      responses: {}
+      headers:
+        Authorization:
+          description: ''
+          type: string
+          example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+          default: ''
+          required: true
+          displayName: Authorization
+        Accept:
+          description: ''
+          type: string
+          example: application/vnd.com.covisint.platform.person.v1+json
+          default: ''
+          required: true
+          displayName: Accept
+        Content-Type:
+          description: ''
+          type: string
+          example: application/vnd.com.covisint.platform.person.v1+json
+          default: ''
+          required: true
+          displayName: Content-Type
   /password/validate:
     post:
       displayName: /persons/password/validate
@@ -525,6 +616,32 @@ baseUriParameters: {}
         default: ''
         required: true
         displayName: isRolesGranted
+  post:
+    displayName: /persons
+    description: 'TODO: Add Description'
+    responses: {}
+    headers:
+      Authorization:
+        description: ''
+        type: string
+        example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+        default: ''
+        required: true
+        displayName: Authorization
+      Accept:
+        description: ''
+        type: string
+        example: application/vnd.com.covisint.platform.person.v1+json
+        default: ''
+        required: true
+        displayName: Accept
+      Content-Type:
+        description: ''
+        type: string
+        example: application/vnd.com.covisint.platform.person.v1+json
+        default: ''
+        required: true
+        displayName: Content-Type
 /personInvitations:
   /:invitationId:
     /servicePackages:
@@ -549,6 +666,44 @@ baseUriParameters: {}
                 default: ''
                 required: true
                 displayName: Accept
+          put:
+            displayName: /personInvitations/:invitationId/servicePackages/:packageId/codes
+            description: 'TODO: Add Description'
+            responses: {}
+            headers:
+              Authorization:
+                description: ''
+                type: string
+                example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+                default: ''
+                required: true
+                displayName: Authorization
+              Content-type:
+                description: ''
+                type: string
+                example: application/vnd.com.covisint.platform.service.codes.v1+json
+                default: ''
+                required: true
+                displayName: Content-type
+              Accept:
+                description: ''
+                type: string
+                example: application/vnd.com.covisint.platform.service.codes.v1+json
+                default: ''
+                required: true
+                displayName: Accept
+          delete:
+            displayName: /personInvitations/:invitationId/servicePackages/:packageId/codes
+            description: 'TODO: Add Description'
+            responses: {}
+            headers:
+              Authorization:
+                description: ''
+                type: string
+                example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+                default: ''
+                required: true
+                displayName: Authorization
         put:
           displayName: /personInvitations/:invitationId/servicePackages/:packageId
           description: 'TODO: Add Description'
@@ -575,6 +730,18 @@ baseUriParameters: {}
               default: ''
               required: true
               displayName: Accept
+        delete:
+          displayName: /personInvitations/:invitationId/servicePackages/:packageId
+          description: 'TODO: Add Description'
+          responses: {}
+          headers:
+            Authorization:
+              description: ''
+              type: string
+              example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+              default: ''
+              required: true
+              displayName: Authorization
       get:
         displayName: /personInvitations/:invitationId/servicePackages
         description: 'TODO: Add Description'
@@ -696,6 +863,32 @@ baseUriParameters: {}
         default: ''
         required: true
         displayName: invitee.id
+  post:
+    displayName: /personInvitations
+    description: 'TODO: Add Description'
+    responses: {}
+    headers:
+      Authorization:
+        description: ''
+        type: string
+        example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+        default: ''
+        required: true
+        displayName: Authorization
+      Accept:
+        description: ''
+        type: string
+        example: application/vnd.com.covisint.platform.person.invitation.v1+json
+        default: ''
+        required: true
+        displayName: Accept
+      Content-Type:
+        description: ''
+        type: string
+        example: application/vnd.com.covisint.platform.person.invitation.v1+json
+        default: ''
+        required: true
+        displayName: Content-Type
 /requests:
   /:requestId:
     get:
@@ -724,6 +917,18 @@ baseUriParameters: {}
           default: ''
           required: true
           displayName: Accept
+    delete:
+      displayName: /requests/:requestId
+      description: 'TODO: Add Description'
+      responses: {}
+      headers:
+        Authorization:
+          description: ''
+          type: string
+          example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+          default: ''
+          required: true
+          displayName: Authorization
   /tasks:
     /approve:
       post:
@@ -836,3 +1041,36 @@ baseUriParameters: {}
         default: ''
         required: true
         displayName: registrant.id
+  post:
+    displayName: /requests
+    description: 'TODO: Add Description'
+    responses: {}
+    headers:
+      SolutionInstanceId:
+        description: ''
+        type: string
+        example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+        default: ''
+        required: true
+        displayName: SolutionInstanceId
+      Authorization:
+        description: ''
+        type: string
+        example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+        default: ''
+        required: true
+        displayName: Authorization
+      Accept:
+        description: ''
+        type: string
+        example: application/vnd.com.covisint.platform.person.request.v1+json
+        default: ''
+        required: true
+        displayName: Accept
+      Content-Type:
+        description: ''
+        type: string
+        example: application/vnd.com.covisint.platform.person.request.v1+json
+        default: ''
+        required: true
+        displayName: Content-Type
