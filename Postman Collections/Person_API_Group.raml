@@ -8,7 +8,6 @@ baseUri: https://api.us1.covisint.com/person/v3
 baseUriParameters: {}
 /userInfo:
   get:
-    displayName: /userInfo
     description: 'TODO: Add Description'
     responses: {}
     headers:
@@ -37,7 +36,6 @@ baseUriParameters: {}
 /persons:
   /count:
     get:
-      displayName: /persons/count
       description: 'TODO: Add Description'
       responses: {}
       headers:
@@ -107,7 +105,6 @@ baseUriParameters: {}
           displayName: email
   /roles/:personId:
     get:
-      displayName: /persons/roles/:personId
       description: 'TODO: Add Description'
       responses: {}
       headers:
@@ -128,7 +125,6 @@ baseUriParameters: {}
   /registration:
     /status:
       post:
-        displayName: /persons/registration/status
         description: 'TODO: Add Description'
         responses: {}
         headers:
@@ -155,7 +151,6 @@ baseUriParameters: {}
             displayName: Content-Type
     /validate:
       post:
-        displayName: /persons/registration/validate
         description: 'TODO: Add Description'
         responses: {}
         headers:
@@ -182,7 +177,6 @@ baseUriParameters: {}
             required: true
             displayName: userName
     post:
-      displayName: /persons/registration
       description: 'TODO: Add Description'
       responses: {}
       headers:
@@ -210,7 +204,6 @@ baseUriParameters: {}
   /:personId:
     /accounts/password:
       put:
-        displayName: /persons/:personId/accounts/password
         description: 'TODO: Add Description'
         responses: {}
         headers:
@@ -236,7 +229,6 @@ baseUriParameters: {}
             required: true
             displayName: Content-Type
       get:
-        displayName: /persons/:personId/accounts/password
         description: 'TODO: Add Description'
         responses: {}
         headers:
@@ -256,7 +248,6 @@ baseUriParameters: {}
             displayName: Accept
     /templates:
       put:
-        displayName: /persons/:personId/templates
         description: 'TODO: Add Description'
         responses: {}
         headers:
@@ -282,7 +273,6 @@ baseUriParameters: {}
             required: true
             displayName: Content-Type
       delete:
-        displayName: /persons/:personId/templates
         description: 'TODO: Add Description'
         responses: {}
         headers:
@@ -309,7 +299,6 @@ baseUriParameters: {}
             required: true
             displayName: id
       get:
-        displayName: /persons/:personId/templates
         description: 'TODO: Add Description'
         responses: {}
         headers:
@@ -328,7 +317,6 @@ baseUriParameters: {}
             required: true
             displayName: Accept
     get:
-      displayName: /persons/:personId
       description: 'TODO: Add Description'
       responses: {}
       headers:
@@ -347,7 +335,6 @@ baseUriParameters: {}
           required: true
           displayName: Accept
     put:
-      displayName: /persons/:personId
       description: 'TODO: Add Description'
       responses: {}
       headers:
@@ -374,7 +361,6 @@ baseUriParameters: {}
           displayName: Content-Type
   /password/validate:
     post:
-      displayName: /persons/password/validate
       description: 'TODO: Add Description'
       responses: {}
       headers:
@@ -401,7 +387,6 @@ baseUriParameters: {}
           displayName: Content-type
   /organizations/:organizationId/securityAdmins:
     get:
-      displayName: /persons/organizations/:organizationId/securityAdmins
       description: 'TODO: Add Description'
       responses: {}
       headers:
@@ -437,7 +422,6 @@ baseUriParameters: {}
   /tasks:
     /activate:
       post:
-        displayName: /persons/tasks/activate
         description: 'TODO: Add Description'
         responses: {}
         headers:
@@ -458,7 +442,6 @@ baseUriParameters: {}
             displayName: personId
     /suspend:
       post:
-        displayName: /persons/tasks/suspend
         description: 'TODO: Add Description'
         responses: {}
         headers:
@@ -479,7 +462,6 @@ baseUriParameters: {}
             displayName: personId
     /unsuspend:
       post:
-        displayName: /persons/tasks/unsuspend
         description: 'TODO: Add Description'
         responses: {}
         headers:
@@ -499,7 +481,6 @@ baseUriParameters: {}
             required: true
             displayName: personId
   get:
-    displayName: /persons
     description: 'TODO: Add Description'
     responses: {}
     headers:
@@ -617,7 +598,6 @@ baseUriParameters: {}
         required: true
         displayName: isRolesGranted
   post:
-    displayName: /persons
     description: 'TODO: Add Description'
     responses: {}
     headers:
@@ -648,7 +628,6 @@ baseUriParameters: {}
       /:packageId:
         /codes:
           get:
-            displayName: /personInvitations/:invitationId/servicePackages/:packageId/codes
             description: 'TODO: Add Description'
             responses: {}
             headers:
@@ -667,7 +646,6 @@ baseUriParameters: {}
                 required: true
                 displayName: Accept
           put:
-            displayName: /personInvitations/:invitationId/servicePackages/:packageId/codes
             description: 'TODO: Add Description'
             responses: {}
             headers:
@@ -693,7 +671,6 @@ baseUriParameters: {}
                 required: true
                 displayName: Accept
           delete:
-            displayName: /personInvitations/:invitationId/servicePackages/:packageId/codes
             description: 'TODO: Add Description'
             responses: {}
             headers:
@@ -705,7 +682,6 @@ baseUriParameters: {}
                 required: true
                 displayName: Authorization
         put:
-          displayName: /personInvitations/:invitationId/servicePackages/:packageId
           description: 'TODO: Add Description'
           responses: {}
           headers:
@@ -731,7 +707,6 @@ baseUriParameters: {}
               required: true
               displayName: Accept
         delete:
-          displayName: /personInvitations/:invitationId/servicePackages/:packageId
           description: 'TODO: Add Description'
           responses: {}
           headers:
@@ -743,7 +718,6 @@ baseUriParameters: {}
               required: true
               displayName: Authorization
       get:
-        displayName: /personInvitations/:invitationId/servicePackages
         description: 'TODO: Add Description'
         responses: {}
         headers:
@@ -762,7 +736,6 @@ baseUriParameters: {}
             required: true
             displayName: Accept
     get:
-      displayName: /personInvitations/:invitationId
       description: 'TODO: Add Description'
       responses: {}
       headers:
@@ -789,7 +762,6 @@ baseUriParameters: {}
           displayName: Accept
   /tasks/accept:
     post:
-      displayName: /personInvitations/tasks/accept
       description: 'TODO: Add Description'
       responses: {}
       headers:
@@ -816,7 +788,6 @@ baseUriParameters: {}
           required: true
           displayName: createdPersonId
   get:
-    displayName: /personInvitations
     description: 'TODO: Add Description'
     responses: {}
     headers:
@@ -864,7 +835,6 @@ baseUriParameters: {}
         required: true
         displayName: invitee.id
   post:
-    displayName: /personInvitations
     description: 'TODO: Add Description'
     responses: {}
     headers:
@@ -892,7 +862,6 @@ baseUriParameters: {}
 /requests:
   /:requestId:
     get:
-      displayName: /requests/:requestId
       description: 'TODO: Add Description'
       responses: {}
       headers:
@@ -918,7 +887,6 @@ baseUriParameters: {}
           required: true
           displayName: Accept
     delete:
-      displayName: /requests/:requestId
       description: 'TODO: Add Description'
       responses: {}
       headers:
@@ -932,7 +900,6 @@ baseUriParameters: {}
   /tasks:
     /approve:
       post:
-        displayName: /requests/tasks/approve
         description: 'TODO: Add Description'
         responses: {}
         headers:
@@ -960,7 +927,6 @@ baseUriParameters: {}
             displayName: requestId
     /deny:
       post:
-        displayName: /requests/tasks/deny
         description: 'TODO: Add Description'
         responses: {}
         headers:
@@ -994,7 +960,6 @@ baseUriParameters: {}
             required: true
             displayName: reason
   get:
-    displayName: /requests
     description: 'TODO: Add Description'
     responses: {}
     headers:
@@ -1042,7 +1007,6 @@ baseUriParameters: {}
         required: true
         displayName: registrant.id
   post:
-    displayName: /requests
     description: 'TODO: Add Description'
     responses: {}
     headers:
