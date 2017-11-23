@@ -8,7 +8,12 @@ baseUri: https://api.us1.covisint.com/person/v3
 baseUriParameters: {}
 /userInfo:
   get:
-    description: 'TODO: Add Description'
+    description: >+
+      Retrieve user claims based on scope and subject id. The scope and subject id are populated by the Apigee gateway. Returns a user claim in the form of ???. This claim authenticates the user to ???.
+
+
+      Parameters:
+
     responses: {}
     headers:
       Authorization:
@@ -36,7 +41,12 @@ baseUriParameters: {}
 /persons:
   /count:
     get:
-      description: 'TODO: Add Description'
+      description: >+
+        Returns the count of person.
+
+
+        Parameters:
+
       responses: {}
       headers:
         Authorization:
@@ -105,7 +115,7 @@ baseUriParameters: {}
           displayName: email
   /roles/:personId:
     get:
-      description: 'TODO: Add Description'
+      description: "This endpoint gets the list of roles for person and also will get the only roles if we pass the onlyroles is equal to true as a media type parameter\n\nParameters:\n\npersonId: \n\n"
       responses: {}
       headers:
         Authorization:
@@ -125,7 +135,12 @@ baseUriParameters: {}
   /registration:
     /status:
       post:
-        description: 'TODO: Add Description'
+        description: >+
+          This endpoint used to get the user's registration status. First will check whether user is authenticated or not basis on passowrd
+
+
+          Parameters:
+
         responses: {}
         headers:
           SolutionInstanceId:
@@ -151,7 +166,12 @@ baseUriParameters: {}
             displayName: Content-Type
     /validate:
       post:
-        description: 'TODO: Add Description'
+        description: >+
+          Validate the email address and/or user name exists. Email address and/or user name provides as parameters.
+
+
+          Parameters:
+
         responses: {}
         headers:
           SolutionInstanceId:
@@ -177,7 +197,12 @@ baseUriParameters: {}
             required: true
             displayName: userName
     post:
-      description: 'TODO: Add Description'
+      description: >+
+        Register a new user. This end point create person, add password account, updating security questions(if provided) and updating the extended attributes. The status of the registered user is "pending".
+
+
+        Parameters:
+
       responses: {}
       headers:
         SolutionInstanceId:
@@ -204,7 +229,12 @@ baseUriParameters: {}
   /:personId:
     /accounts/password:
       put:
-        description: 'TODO: Add Description'
+        description: >+
+          Create or update the password account.
+
+
+          Parameters:
+
         responses: {}
         headers:
           Authorization:
@@ -229,7 +259,12 @@ baseUriParameters: {}
             required: true
             displayName: Content-Type
       get:
-        description: 'TODO: Add Description'
+        description: >+
+          Returns the person's password account
+
+
+          Parameters:
+
         responses: {}
         headers:
           Authorization:
@@ -248,7 +283,12 @@ baseUriParameters: {}
             displayName: Accept
     /templates:
       put:
-        description: 'TODO: Add Description'
+        description: >+
+          This endpoint updates an person with set of extended attributes. First it will verify the provided extended attributes are exists. If doesn't exist then it will throw an exception. It will always updates the provided attributes with the specified values, if attributes already exists but not provided by the client then it will ignore to update those attributes.
+
+
+          Parameters:
+
         responses: {}
         headers:
           Authorization:
@@ -273,7 +313,12 @@ baseUriParameters: {}
             required: true
             displayName: Content-Type
       delete:
-        description: 'TODO: Add Description'
+        description: >+
+          This endpoint deletes an extended attribute for the person.
+
+
+          Parameters:
+
         responses: {}
         headers:
           Authorization:
@@ -299,7 +344,12 @@ baseUriParameters: {}
             required: true
             displayName: id
       get:
-        description: 'TODO: Add Description'
+        description: >+
+          This endpoint gets an extended attribute templates associated with the person.
+
+
+          Parameters:
+
         responses: {}
         headers:
           Authorization:
@@ -317,7 +367,15 @@ baseUriParameters: {}
             required: true
             displayName: Accept
     get:
-      description: 'TODO: Add Description'
+      description: >+
+        Returns a person by id.
+
+
+        Parameters:
+
+
+        personId: The person's unique identifier.
+
       responses: {}
       headers:
         Authorization:
@@ -335,7 +393,15 @@ baseUriParameters: {}
           required: true
           displayName: Accept
     put:
-      description: 'TODO: Add Description'
+      description: >+
+        Updates a person's base demographical properties.
+
+
+        Parameters:
+
+
+        personId: The person's unique identifier.
+
       responses: {}
       headers:
         Authorization:
@@ -361,7 +427,12 @@ baseUriParameters: {}
           displayName: Content-Type
   /password/validate:
     post:
-      description: 'TODO: Add Description'
+      description: >+
+        collection endpoint to validate password against policy resources retrieved by using InviteId and orgnizationId.
+
+
+        Parameters:
+
       responses: {}
       headers:
         SolutionInstanceId:
@@ -387,7 +458,7 @@ baseUriParameters: {}
           displayName: Content-type
   /organizations/:organizationId/securityAdmins:
     get:
-      description: 'TODO: Add Description'
+      description: "Searches security admins according to the organization id provided.\n\nParameters:\n\norganizationId: \n\n"
       responses: {}
       headers:
         Authorization:
@@ -422,7 +493,12 @@ baseUriParameters: {}
   /tasks:
     /activate:
       post:
-        description: 'TODO: Add Description'
+        description: >+
+          Activate a person that is in pending status.
+
+
+          Parameters:
+
         responses: {}
         headers:
           Authorization:
@@ -442,7 +518,12 @@ baseUriParameters: {}
             displayName: personId
     /suspend:
       post:
-        description: 'TODO: Add Description'
+        description: >+
+          Suspend a person that is in active status.
+
+
+          Parameters:
+
         responses: {}
         headers:
           Authorization:
@@ -462,7 +543,12 @@ baseUriParameters: {}
             displayName: personId
     /unsuspend:
       post:
-        description: 'TODO: Add Description'
+        description: >+
+          Unsuspend a person that is in suspended status.
+
+
+          Parameters:
+
         responses: {}
         headers:
           Authorization:
@@ -481,7 +567,12 @@ baseUriParameters: {}
             required: true
             displayName: personId
   get:
-    description: 'TODO: Add Description'
+    description: >+
+      Searches person resources according to the filter criteria provided. You have the option of searching for one or more persons by valid personIds. You may also search for persons matching specific parameters such as username, email, organization name, roleName and others.
+
+
+      Parameters:
+
     responses: {}
     headers:
       Authorization:
@@ -598,7 +689,12 @@ baseUriParameters: {}
         required: true
         displayName: isRolesGranted
   post:
-    description: 'TODO: Add Description'
+    description: >+
+      Creates a new person in unactivated status.
+
+
+      Parameters:
+
     responses: {}
     headers:
       Authorization:
@@ -628,7 +724,12 @@ baseUriParameters: {}
       /:packageId:
         /codes:
           get:
-            description: 'TODO: Add Description'
+            description: >+
+              Returns the service codes associated to a service package associated to an invitation.
+
+
+              Parameters:
+
             responses: {}
             headers:
               Authorization:
@@ -646,7 +747,12 @@ baseUriParameters: {}
                 required: true
                 displayName: Accept
           put:
-            description: 'TODO: Add Description'
+            description: >+
+              Updates the codes for a service package associated to an invitation.
+
+
+              Parameters:
+
             responses: {}
             headers:
               Authorization:
@@ -671,7 +777,12 @@ baseUriParameters: {}
                 required: true
                 displayName: Accept
           delete:
-            description: 'TODO: Add Description'
+            description: >+
+              Deletes the codes for a service package associated to an invitation.
+
+
+              Parameters:
+
             responses: {}
             headers:
               Authorization:
@@ -682,7 +793,15 @@ baseUriParameters: {}
                 required: true
                 displayName: Authorization
         put:
-          description: 'TODO: Add Description'
+          description: >+
+            Sets a package as being part of an invitation.
+
+
+            Parameters:
+
+
+            packageId: Unique identifier of the package
+
           responses: {}
           headers:
             Authorization:
@@ -707,7 +826,15 @@ baseUriParameters: {}
               required: true
               displayName: Accept
         delete:
-          description: 'TODO: Add Description'
+          description: >+
+            Deletes the package from being associated to the invitation.
+
+
+            Parameters:
+
+
+            packageId: Unique identifier of the package
+
           responses: {}
           headers:
             Authorization:
@@ -718,7 +845,12 @@ baseUriParameters: {}
               required: true
               displayName: Authorization
       get:
-        description: 'TODO: Add Description'
+        description: >+
+          Returns the service packages associated to an invitation.
+
+
+          Parameters:
+
         responses: {}
         headers:
           Authorization:
@@ -736,7 +868,15 @@ baseUriParameters: {}
             required: true
             displayName: Accept
     get:
-      description: 'TODO: Add Description'
+      description: >+
+        Returns the person invitation by id.
+
+
+        Parameters:
+
+
+        invitationId: Unique identifier of the person invitation.
+
       responses: {}
       headers:
         SolutionInstanceId:
@@ -762,7 +902,12 @@ baseUriParameters: {}
           displayName: Accept
   /tasks/accept:
     post:
-      description: 'TODO: Add Description'
+      description: >+
+        Accept the person invitation.  This also results in the invitation being deleted.
+
+
+        Parameters:
+
       responses: {}
       headers:
         SolutionInstanceId:
@@ -788,7 +933,12 @@ baseUriParameters: {}
           required: true
           displayName: createdPersonId
   get:
-    description: 'TODO: Add Description'
+    description: >+
+      Performs a search for person invitations.
+
+
+      Parameters:
+
     responses: {}
     headers:
       Authorization:
@@ -835,7 +985,12 @@ baseUriParameters: {}
         required: true
         displayName: invitee.id
   post:
-    description: 'TODO: Add Description'
+    description: >+
+      Creates a new person invitation.
+
+
+      Parameters:
+
     responses: {}
     headers:
       Authorization:
@@ -862,7 +1017,15 @@ baseUriParameters: {}
 /requests:
   /:requestId:
     get:
-      description: 'TODO: Add Description'
+      description: >+
+        Returns a person request by id.
+
+
+        Parameters:
+
+
+        requestId: Unique identifier of the person request
+
       responses: {}
       headers:
         SolutionInstanceId:
@@ -887,7 +1050,15 @@ baseUriParameters: {}
           required: true
           displayName: Accept
     delete:
-      description: 'TODO: Add Description'
+      description: >+
+        Deletes a person request.
+
+
+        Parameters:
+
+
+        requestId: Unique identifier of the person request
+
       responses: {}
       headers:
         Authorization:
@@ -900,7 +1071,12 @@ baseUriParameters: {}
   /tasks:
     /approve:
       post:
-        description: 'TODO: Add Description'
+        description: >+
+          Approve a person request.
+
+
+          Parameters:
+
         responses: {}
         headers:
           Authorization:
@@ -927,7 +1103,12 @@ baseUriParameters: {}
             displayName: requestId
     /deny:
       post:
-        description: 'TODO: Add Description'
+        description: >+
+          It will deny the person request as well as requested package and exchange package id granted the user.
+
+
+          Parameters:
+
         responses: {}
         headers:
           Authorization:
@@ -960,7 +1141,12 @@ baseUriParameters: {}
             required: true
             displayName: reason
   get:
-    description: 'TODO: Add Description'
+    description: >+
+      Performs a search for person registration requests.
+
+
+      Parameters:
+
     responses: {}
     headers:
       SolutionInstanceId:
@@ -1007,7 +1193,12 @@ baseUriParameters: {}
         required: true
         displayName: registrant.id
   post:
-    description: 'TODO: Add Description'
+    description: >+
+      Creates a new person request.
+
+
+      Parameters:
+
     responses: {}
     headers:
       SolutionInstanceId:
