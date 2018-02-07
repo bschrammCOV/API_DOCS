@@ -20,22 +20,18 @@ baseUriParameters: {}
         description: ''
         type: string
         example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-        default: ''
         required: true
         displayName: Authorization
       Accept:
         description: ''
         type: string
         example: application/vnd.com.covisint.platform.userinfo.v1+json
-        default: ''
         required: true
         displayName: Accept
     queryParameters:
       scope:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: scope
 /persons:
@@ -53,64 +49,48 @@ baseUriParameters: {}
           description: ''
           type: string
           example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          default: ''
           required: true
           displayName: Authorization
         Accept:
           description: ''
           type: string
           example: text/plain
-          default: ''
           required: true
           displayName: Accept
       queryParameters:
         id:
           description: ''
           type: string
-          example: ''
-          default: ''
           required: true
           displayName: id
         organization.id:
           description: ''
           type: string
-          example: ''
-          default: ''
           required: true
           displayName: organization.id
         username:
           description: ''
           type: string
-          example: ''
-          default: ''
           required: true
           displayName: username
         authnDomain:
           description: ''
           type: string
-          example: ''
-          default: ''
           required: true
           displayName: authnDomain
         name.given:
           description: ''
           type: string
-          example: ''
-          default: ''
           required: true
           displayName: name.given
         name.surname:
           description: ''
           type: string
-          example: ''
-          default: ''
           required: true
           displayName: name.surname
         email:
           description: ''
           type: string
-          example: ''
-          default: ''
           required: true
           displayName: email
   /roles/:personId:
@@ -122,14 +102,12 @@ baseUriParameters: {}
           description: ''
           type: string
           example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          default: ''
           required: true
           displayName: Authorization
         Accept:
           description: ''
           type: string
           example: application/vnd.com.covisint.platform.person.role.v1+json:onlyroles=true
-          default: ''
           required: true
           displayName: Accept
   /registration:
@@ -147,21 +125,18 @@ baseUriParameters: {}
             description: ''
             type: string
             example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            default: ''
             required: true
             displayName: SolutionInstanceId
           Accept:
             description: ''
             type: string
             example: text/plain
-            default: ''
             required: true
             displayName: Accept
           Content-Type:
             description: ''
             type: string
             example: application/vnd.com.covisint.platform.authn.password.req.v1+json
-            default: ''
             required: true
             displayName: Content-Type
     /validate:
@@ -178,22 +153,17 @@ baseUriParameters: {}
             description: ''
             type: string
             example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            default: ''
             required: true
             displayName: SolutionInstanceId
         queryParameters:
           emailAddress:
             description: ''
             type: string
-            example: ''
-            default: ''
             required: true
             displayName: emailAddress
           userName:
             description: ''
             type: string
-            example: ''
-            default: ''
             required: true
             displayName: userName
     post:
@@ -209,21 +179,18 @@ baseUriParameters: {}
           description: ''
           type: string
           example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          default: ''
           required: true
           displayName: SolutionInstanceId
         Accept:
           description: ''
           type: string
           example: application/vnd.com.covisint.platform.person.password.account.v1+json
-          default: ''
           required: true
           displayName: Accept
         Content-Type:
           description: ''
           type: string
           example: application/vnd.com.covisint.platform.person.password.account.v1+json
-          default: ''
           required: true
           displayName: Content-Type
   /:personId:
@@ -241,21 +208,18 @@ baseUriParameters: {}
             description: ''
             type: string
             example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            default: ''
             required: true
             displayName: Authorization
           Accept:
             description: ''
             type: string
             example: application/vnd.com.covisint.platform.person.account.password.v1+json
-            default: ''
             required: true
             displayName: Accept
           Content-Type:
             description: ''
             type: string
             example: application/vnd.com.covisint.platform.person.account.password.v1+json
-            default: ''
             required: true
             displayName: Content-Type
       get:
@@ -271,14 +235,12 @@ baseUriParameters: {}
             description: ''
             type: string
             example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            default: ''
             required: true
             displayName: Authorization
           Accept:
             description: ''
             type: string
             example: application/vnd.com.covisint.platform.person.account.password.v1+json
-            default: ''
             required: true
             displayName: Accept
     /templates:
@@ -295,21 +257,18 @@ baseUriParameters: {}
             description: ''
             type: string
             example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            default: ''
             required: true
             displayName: Authorization
           Accept:
             description: ''
             type: string
             example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
-            default: ''
             required: true
             displayName: Accept
           Content-Type:
             description: ''
             type: string
             example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
-            default: ''
             required: true
             displayName: Content-Type
       delete:
@@ -325,22 +284,18 @@ baseUriParameters: {}
             description: ''
             type: string
             example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            default: ''
             required: true
             displayName: Authorization
           Accept:
             description: ''
             type: string
             example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
-            default: ''
             required: true
             displayName: Accept
         queryParameters:
           id:
             description: ''
             type: string
-            example: ''
-            default: ''
             required: true
             displayName: id
       get:
@@ -356,14 +311,12 @@ baseUriParameters: {}
             description: ''
             type: string
             example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            default: ''
             required: true
             displayName: Authorization
           Accept:
             description: ''
             type: string
             example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
-            default: ''
             required: true
             displayName: Accept
     get:
@@ -382,14 +335,12 @@ baseUriParameters: {}
           description: ''
           type: string
           example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          default: ''
           required: true
           displayName: Authorization
         Accept:
           description: ''
           type: string
           example: application/vnd.com.covisint.platform.person.v1+json
-          default: ''
           required: true
           displayName: Accept
     put:
@@ -408,21 +359,18 @@ baseUriParameters: {}
           description: ''
           type: string
           example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          default: ''
           required: true
           displayName: Authorization
         Accept:
           description: ''
           type: string
           example: application/vnd.com.covisint.platform.person.v1+json
-          default: ''
           required: true
           displayName: Accept
         Content-Type:
           description: ''
           type: string
           example: application/vnd.com.covisint.platform.person.v1+json
-          default: ''
           required: true
           displayName: Content-Type
   /password/validate:
@@ -439,21 +387,18 @@ baseUriParameters: {}
           description: ''
           type: string
           example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          default: ''
           required: true
           displayName: SolutionInstanceId
         Accept:
           description: ''
           type: string
           example: application/vnd.com.covisint.platform.password.validation.response.v1+json
-          default: ''
           required: true
           displayName: Accept
         Content-type:
           description: ''
           type: string
           example: application/vnd.com.covisint.platform.password.validation.v1+json
-          default: ''
           required: true
           displayName: Content-type
   /organizations/:organizationId/securityAdmins:
@@ -465,29 +410,23 @@ baseUriParameters: {}
           description: ''
           type: string
           example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          default: ''
           required: true
           displayName: Authorization
         Accept:
           description: ''
           type: string
           example: application/vnd.com.covisint.platform.person.v1+json
-          default: ''
           required: true
           displayName: Accept
       queryParameters:
         page:
           description: ''
           type: string
-          example: ''
-          default: ''
           required: true
           displayName: page
         pageSize:
           description: ''
           type: string
-          example: ''
-          default: ''
           required: true
           displayName: pageSize
   /tasks:
@@ -505,15 +444,12 @@ baseUriParameters: {}
             description: ''
             type: string
             example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            default: ''
             required: true
             displayName: Authorization
         queryParameters:
           personId:
             description: ''
             type: string
-            example: ''
-            default: ''
             required: true
             displayName: personId
     /suspend:
@@ -530,15 +466,12 @@ baseUriParameters: {}
             description: ''
             type: string
             example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            default: ''
             required: true
             displayName: Authorization
         queryParameters:
           personId:
             description: ''
             type: string
-            example: ''
-            default: ''
             required: true
             displayName: personId
     /unsuspend:
@@ -555,15 +488,12 @@ baseUriParameters: {}
             description: ''
             type: string
             example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            default: ''
             required: true
             displayName: Authorization
         queryParameters:
           personId:
             description: ''
             type: string
-            example: ''
-            default: ''
             required: true
             displayName: personId
   get:
@@ -579,113 +509,83 @@ baseUriParameters: {}
         description: ''
         type: string
         example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-        default: ''
         required: true
         displayName: Authorization
       Accept:
         description: ''
         type: string
         example: application/vnd.com.covisint.platform.person.v1+json
-        default: ''
         required: true
         displayName: Accept
     queryParameters:
       page:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: page
       pageSize:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: pageSize
       id:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: id
       organization.id:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: organization.id
       username:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: username
       authnDomain:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: authnDomain
       name.given:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: name.given
       name.surname:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: name.surname
       email:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: email
       securityadmin:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: securityadmin
       roleId:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: roleId
       roleName:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: roleName
       fullName:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: fullName
       isRolesGranted:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: isRolesGranted
   post:
@@ -701,21 +601,18 @@ baseUriParameters: {}
         description: ''
         type: string
         example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-        default: ''
         required: true
         displayName: Authorization
       Accept:
         description: ''
         type: string
         example: application/vnd.com.covisint.platform.person.v1+json
-        default: ''
         required: true
         displayName: Accept
       Content-Type:
         description: ''
         type: string
         example: application/vnd.com.covisint.platform.person.v1+json
-        default: ''
         required: true
         displayName: Content-Type
 /personInvitations:
@@ -736,14 +633,12 @@ baseUriParameters: {}
                 description: ''
                 type: string
                 example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-                default: ''
                 required: true
                 displayName: Authorization
               Accept:
                 description: ''
                 type: string
                 example: application/vnd.com.covisint.platform.service.codes.v1+json
-                default: ''
                 required: true
                 displayName: Accept
           put:
@@ -759,21 +654,18 @@ baseUriParameters: {}
                 description: ''
                 type: string
                 example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-                default: ''
                 required: true
                 displayName: Authorization
               Content-type:
                 description: ''
                 type: string
                 example: application/vnd.com.covisint.platform.service.codes.v1+json
-                default: ''
                 required: true
                 displayName: Content-type
               Accept:
                 description: ''
                 type: string
                 example: application/vnd.com.covisint.platform.service.codes.v1+json
-                default: ''
                 required: true
                 displayName: Accept
           delete:
@@ -789,7 +681,6 @@ baseUriParameters: {}
                 description: ''
                 type: string
                 example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-                default: ''
                 required: true
                 displayName: Authorization
         put:
@@ -808,21 +699,18 @@ baseUriParameters: {}
               description: ''
               type: string
               example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-              default: ''
               required: true
               displayName: Authorization
             Content-type:
               description: ''
               type: string
               example: application/vnd.com.covisint.platform.resourceReferences.v1+json
-              default: ''
               required: true
               displayName: Content-type
             Accept:
               description: ''
               type: string
               example: application/vnd.com.covisint.platform.resourceReferences.v1+json
-              default: ''
               required: true
               displayName: Accept
         delete:
@@ -841,7 +729,6 @@ baseUriParameters: {}
               description: ''
               type: string
               example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-              default: ''
               required: true
               displayName: Authorization
       get:
@@ -857,14 +744,12 @@ baseUriParameters: {}
             description: ''
             type: string
             example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            default: ''
             required: true
             displayName: Authorization
           Accept:
             description: ''
             type: string
             example: application/vnd.com.covisint.platform.resourceReferences.v1+json
-            default: ''
             required: true
             displayName: Accept
     get:
@@ -883,21 +768,18 @@ baseUriParameters: {}
           description: ''
           type: string
           example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          default: ''
           required: true
           displayName: SolutionInstanceId
         Authorization:
           description: ''
           type: string
           example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          default: ''
           required: true
           displayName: Authorization
         Accept:
           description: ''
           type: string
           example: application/vnd.com.covisint.platform.person.invitation.v1+json
-          default: ''
           required: true
           displayName: Accept
   /tasks/accept:
@@ -914,22 +796,17 @@ baseUriParameters: {}
           description: ''
           type: string
           example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          default: ''
           required: true
           displayName: SolutionInstanceId
       queryParameters:
         inviteId:
           description: ''
           type: string
-          example: ''
-          default: ''
           required: true
           displayName: inviteId
         createdPersonId:
           description: ''
           type: string
-          example: ''
-          default: ''
           required: true
           displayName: createdPersonId
   get:
@@ -945,43 +822,33 @@ baseUriParameters: {}
         description: ''
         type: string
         example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-        default: ''
         required: true
         displayName: Authorization
       Accept:
         description: ''
         type: string
         example: application/vnd.com.covisint.platform.person.invitation.v1+json
-        default: ''
         required: true
         displayName: Accept
     queryParameters:
       page:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: page
       pageSize:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: pageSize
       invitor.id:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: invitor.id
       invitee.id:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: invitee.id
   post:
@@ -997,21 +864,18 @@ baseUriParameters: {}
         description: ''
         type: string
         example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-        default: ''
         required: true
         displayName: Authorization
       Accept:
         description: ''
         type: string
         example: application/vnd.com.covisint.platform.person.invitation.v1+json
-        default: ''
         required: true
         displayName: Accept
       Content-Type:
         description: ''
         type: string
         example: application/vnd.com.covisint.platform.person.invitation.v1+json
-        default: ''
         required: true
         displayName: Content-Type
 /requests:
@@ -1032,21 +896,18 @@ baseUriParameters: {}
           description: ''
           type: string
           example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          default: ''
           required: true
           displayName: SolutionInstanceId
         Authorization:
           description: ''
           type: string
           example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          default: ''
           required: true
           displayName: Authorization
         Accept:
           description: ''
           type: string
           example: application/vnd.com.covisint.platform.person.request.v1+json
-          default: ''
           required: true
           displayName: Accept
     delete:
@@ -1065,7 +926,6 @@ baseUriParameters: {}
           description: ''
           type: string
           example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          default: ''
           required: true
           displayName: Authorization
   /tasks:
@@ -1083,22 +943,18 @@ baseUriParameters: {}
             description: ''
             type: string
             example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            default: ''
             required: true
             displayName: Authorization
           Accept:
             description: ''
             type: string
             example: application/vnd.com.covisint.platform.person.request.v1+json;grantdefaultpackage=true
-            default: ''
             required: true
             displayName: Accept
         queryParameters:
           requestId:
             description: ''
             type: string
-            example: ''
-            default: ''
             required: true
             displayName: requestId
     /deny:
@@ -1115,29 +971,23 @@ baseUriParameters: {}
             description: ''
             type: string
             example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            default: ''
             required: true
             displayName: Authorization
           Accept:
             description: ''
             type: string
             example: application/vnd.com.covisint.platform.person.request.v1+json
-            default: ''
             required: true
             displayName: Accept
         queryParameters:
           requestId:
             description: ''
             type: string
-            example: ''
-            default: ''
             required: true
             displayName: requestId
           reason:
             description: ''
             type: string
-            example: ''
-            default: ''
             required: true
             displayName: reason
   get:
@@ -1153,43 +1003,34 @@ baseUriParameters: {}
         description: ''
         type: string
         example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-        default: ''
         required: true
         displayName: SolutionInstanceId
       Authorization:
         description: ''
         type: string
         example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-        default: ''
         required: true
         displayName: Authorization
       Accept:
         description: ''
         type: string
         example: application/vnd.com.covisint.platform.person.request.v1+json
-        default: ''
         required: true
         displayName: Accept
     queryParameters:
       page:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: page
       pageSize:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: pageSize
       registrant.id:
         description: ''
         type: string
-        example: ''
-        default: ''
         required: true
         displayName: registrant.id
   post:
@@ -1205,27 +1046,23 @@ baseUriParameters: {}
         description: ''
         type: string
         example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-        default: ''
         required: true
         displayName: SolutionInstanceId
       Authorization:
         description: ''
         type: string
         example: Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-        default: ''
         required: true
         displayName: Authorization
       Accept:
         description: ''
         type: string
         example: application/vnd.com.covisint.platform.person.request.v1+json
-        default: ''
         required: true
         displayName: Accept
       Content-Type:
         description: ''
         type: string
         example: application/vnd.com.covisint.platform.person.request.v1+json
-        default: ''
         required: true
         displayName: Content-Type
