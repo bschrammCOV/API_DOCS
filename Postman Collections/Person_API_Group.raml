@@ -7,8 +7,8 @@
   },
   "item": [
     {
-      "_postman_id": "1239966-ce132c8f-b0d1-a161-00b2-72d24613412b",
       "name": "/userInfo",
+      "_postman_id": "1239966-ce132c8f-b0d1-a161-00b2-72d24613412b",
       "request": {
         "method": "get",
         "header": [
@@ -21,7 +21,10 @@
             "value": "application/vnd.com.covisint.platform.userinfo.v1+json"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/userInfo?scope=",
           "protocol": "https",
@@ -48,8 +51,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-10f8ca67-a701-6d56-c54b-8adb8dc28b34",
       "name": "/persons",
+      "_postman_id": "1239966-10f8ca67-a701-6d56-c54b-8adb8dc28b34",
       "request": {
         "method": "get",
         "header": [
@@ -62,7 +65,10 @@
             "value": "application/vnd.com.covisint.platform.person.v1+json"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/persons?page=&pageSize=&id=&organization.id=&username=&authnDomain=&name.given=&name.surname=&email=&securityadmin=&roleId=&roleName=&fullName=&isRolesGranted=",
           "protocol": "https",
@@ -141,8 +147,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-d8aa5462-41c3-95ba-484f-9fe21918cf36",
       "name": "/persons",
+      "_postman_id": "1239966-d8aa5462-41c3-95ba-484f-9fe21918cf36",
       "request": {
         "method": "post",
         "header": [
@@ -169,8 +175,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-5d0e84d7-db61-fae9-d8c8-84faa3b56ee2",
       "name": "/persons/count",
+      "_postman_id": "1239966-5d0e84d7-db61-fae9-d8c8-84faa3b56ee2",
       "request": {
         "method": "get",
         "header": [
@@ -183,7 +189,10 @@
             "value": "text/plain"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/persons/count?id=&organization.id=&username=&authnDomain=&name.given=&name.surname=&email=",
           "protocol": "https",
@@ -235,8 +244,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-77c060e4-d58c-d22c-0ad9-f043031dd687",
       "name": "/persons/roles/:personId",
+      "_postman_id": "1239966-77c060e4-d58c-d22c-0ad9-f043031dd687",
       "request": {
         "method": "get",
         "header": [
@@ -249,15 +258,39 @@
             "value": "application/vnd.com.covisint.platform.person.role.v1+json:onlyroles=true"
           }
         ],
-        "body": {},
-        "url": "https://api.us1.covisint.com/person/v3/persons/roles/:personId",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/roles/:personId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            "roles",
+            ":personId"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
         "description": "This endpoint gets the list of roles for person and also will get the only roles if we pass the onlyroles is equal to true as a media type parameter\n\nParameters:\n\npersonId: \n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-1e74ab1d-5b76-5c3a-5033-d1b68e7249c2",
       "name": "/persons/registration",
+      "_postman_id": "1239966-1e74ab1d-5b76-5c3a-5033-d1b68e7249c2",
       "request": {
         "method": "post",
         "header": [
@@ -284,8 +317,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-ae340e1b-81ef-ebae-c665-5cd62d8c2176",
       "name": "/persons/registration/status",
+      "_postman_id": "1239966-ae340e1b-81ef-ebae-c665-5cd62d8c2176",
       "request": {
         "method": "post",
         "header": [
@@ -316,8 +349,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-544249db-8bae-fa7a-0352-5a04b07f06bf",
       "name": "/persons/registration/validate",
+      "_postman_id": "1239966-544249db-8bae-fa7a-0352-5a04b07f06bf",
       "request": {
         "method": "post",
         "header": [
@@ -326,7 +359,10 @@
             "value": "ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/persons/registration/validate?emailAddress=&userName=",
           "protocol": "https",
@@ -359,8 +395,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-2e08a13d-656c-e7b1-27b8-ee2202b5230a",
       "name": "/persons/:personId",
+      "_postman_id": "1239966-2e08a13d-656c-e7b1-27b8-ee2202b5230a",
       "request": {
         "method": "get",
         "header": [
@@ -373,15 +409,38 @@
             "value": "application/vnd.com.covisint.platform.person.v1+json"
           }
         ],
-        "body": {},
-        "url": "https://api.us1.covisint.com/person/v3/persons/:personId",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/:personId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            ":personId"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
         "description": "Returns a person by id.\n\nParameters:\n\npersonId: The person's unique identifier.\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-fb782612-b650-4b0f-e96a-4a6ba7307319",
       "name": "/persons/:personId",
+      "_postman_id": "1239966-fb782612-b650-4b0f-e96a-4a6ba7307319",
       "request": {
         "method": "put",
         "header": [
@@ -402,14 +461,34 @@
           "mode": "raw",
           "raw": ""
         },
-        "url": "https://api.us1.covisint.com/person/v3/persons/:personId",
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/:personId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            ":personId"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
         "description": "Updates a person's base demographical properties.\n\nParameters:\n\npersonId: The person's unique identifier.\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-0dc2ee1c-241c-04ed-7e34-ea356889496a",
       "name": "/persons/:personId/accounts/password",
+      "_postman_id": "1239966-0dc2ee1c-241c-04ed-7e34-ea356889496a",
       "request": {
         "method": "put",
         "header": [
@@ -430,14 +509,36 @@
           "mode": "raw",
           "raw": ""
         },
-        "url": "https://api.us1.covisint.com/person/v3/persons/:personId/accounts/password",
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/:personId/accounts/password",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            ":personId",
+            "accounts",
+            "password"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
         "description": "Create or update the password account.\n\nParameters:\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-f60c7d1d-b7d4-1db7-696c-86f9d9641edb",
       "name": "/persons/:personId/accounts/password",
+      "_postman_id": "1239966-f60c7d1d-b7d4-1db7-696c-86f9d9641edb",
       "request": {
         "method": "get",
         "header": [
@@ -450,15 +551,40 @@
             "value": "application/vnd.com.covisint.platform.person.account.password.v1+json"
           }
         ],
-        "body": {},
-        "url": "https://api.us1.covisint.com/person/v3/persons/:personId/accounts/password",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/:personId/accounts/password",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            ":personId",
+            "accounts",
+            "password"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
         "description": "Returns the person's password account\n\nParameters:\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-f76b23b5-3d68-e140-8394-7d9beacc8c07",
       "name": "/persons/:personId/templates",
+      "_postman_id": "1239966-f76b23b5-3d68-e140-8394-7d9beacc8c07",
       "request": {
         "method": "put",
         "header": [
@@ -479,14 +605,35 @@
           "mode": "raw",
           "raw": ""
         },
-        "url": "https://api.us1.covisint.com/person/v3/persons/:personId/templates",
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/:personId/templates",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            ":personId",
+            "templates"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
         "description": "This endpoint updates an person with set of extended attributes. First it will verify the provided extended attributes are exists. If doesn't exist then it will throw an exception. It will always updates the provided attributes with the specified values, if attributes already exists but not provided by the client then it will ignore to update those attributes.\n\nParameters:\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-a89fe8af-71c7-3e9e-29cc-d69ed2272c99",
       "name": "/persons/:personId/templates",
+      "_postman_id": "1239966-a89fe8af-71c7-3e9e-29cc-d69ed2272c99",
       "request": {
         "method": "delete",
         "header": [
@@ -499,7 +646,10 @@
             "value": "application/vnd.com.covisint.platform.person.attribute.template.v1+json"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/persons/:personId/templates?id=",
           "protocol": "https",
@@ -521,6 +671,11 @@
               "key": "id",
               "value": ""
             }
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
           ]
         },
         "description": "This endpoint deletes an extended attribute for the person.\n\nParameters:\n\n"
@@ -528,8 +683,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-ad805088-ba02-c85c-1e54-880be9a8f777",
       "name": "/persons/:personId/templates",
+      "_postman_id": "1239966-ad805088-ba02-c85c-1e54-880be9a8f777",
       "request": {
         "method": "get",
         "header": [
@@ -542,15 +697,39 @@
             "value": "application/vnd.com.covisint.platform.person.attribute.template.v1+json"
           }
         ],
-        "body": {},
-        "url": "https://api.us1.covisint.com/person/v3/persons/:personId/templates",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/:personId/templates",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            ":personId",
+            "templates"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
         "description": "This endpoint gets an extended attribute templates associated with the person.\n\nParameters:\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-ed5af33c-ff4e-5622-c367-992947b65a22",
       "name": "/persons/tasks/activate",
+      "_postman_id": "1239966-ed5af33c-ff4e-5622-c367-992947b65a22",
       "request": {
         "method": "post",
         "header": [
@@ -559,7 +738,10 @@
             "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/persons/tasks/activate?personId=",
           "protocol": "https",
@@ -588,8 +770,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-4671d717-22c1-1396-5625-f0e575568dae",
       "name": "/persons/tasks/suspend",
+      "_postman_id": "1239966-4671d717-22c1-1396-5625-f0e575568dae",
       "request": {
         "method": "post",
         "header": [
@@ -598,7 +780,10 @@
             "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/persons/tasks/suspend?personId=",
           "protocol": "https",
@@ -627,8 +812,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-30ca76c5-9d40-b3ed-0177-a1e0861920cf",
       "name": "/persons/tasks/unsuspend",
+      "_postman_id": "1239966-30ca76c5-9d40-b3ed-0177-a1e0861920cf",
       "request": {
         "method": "post",
         "header": [
@@ -637,7 +822,10 @@
             "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/persons/tasks/unsuspend?personId=",
           "protocol": "https",
@@ -666,8 +854,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-bbfde567-d6f5-fc01-42fc-e76cc5e785ec",
       "name": "/persons/password/validate",
+      "_postman_id": "1239966-bbfde567-d6f5-fc01-42fc-e76cc5e785ec",
       "request": {
         "method": "post",
         "header": [
@@ -698,8 +886,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-e9881557-7c35-a41f-4768-1f43b9c718fb",
       "name": "/persons/organizations/:organizationId/securityAdmins",
+      "_postman_id": "1239966-e9881557-7c35-a41f-4768-1f43b9c718fb",
       "request": {
         "method": "get",
         "header": [
@@ -712,7 +900,10 @@
             "value": "application/vnd.com.covisint.platform.person.v1+json"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/persons/organizations/:organizationId/securityAdmins?page=&pageSize=",
           "protocol": "https",
@@ -739,6 +930,11 @@
               "key": "pageSize",
               "value": ""
             }
+          ],
+          "variable": [
+            {
+              "key": "organizationId"
+            }
           ]
         },
         "description": "Searches security admins according to the organization id provided.\n\nParameters:\n\norganizationId: \n\n"
@@ -746,8 +942,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-a24e762c-43c1-d722-3d95-ae77da700320",
       "name": "/personInvitations",
+      "_postman_id": "1239966-a24e762c-43c1-d722-3d95-ae77da700320",
       "request": {
         "method": "get",
         "header": [
@@ -760,7 +956,10 @@
             "value": "application/vnd.com.covisint.platform.person.invitation.v1+json"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/personInvitations?page=&pageSize=&invitor.id=&invitee.id=",
           "protocol": "https",
@@ -799,8 +998,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-c7a55514-f780-7766-f61a-ad003d797b76",
       "name": "/personInvitations",
+      "_postman_id": "1239966-c7a55514-f780-7766-f61a-ad003d797b76",
       "request": {
         "method": "post",
         "header": [
@@ -827,8 +1026,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-cdf83b59-b717-7e0f-73bc-b9830deeb590",
       "name": "/personInvitations/:invitationId",
+      "_postman_id": "1239966-cdf83b59-b717-7e0f-73bc-b9830deeb590",
       "request": {
         "method": "get",
         "header": [
@@ -845,15 +1044,38 @@
             "value": "application/vnd.com.covisint.platform.person.invitation.v1+json"
           }
         ],
-        "body": {},
-        "url": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            }
+          ]
+        },
         "description": "Returns the person invitation by id.\n\nParameters:\n\ninvitationId: Unique identifier of the person invitation.\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-a7a46ee2-c815-903a-8530-d4e8dfd3066e",
       "name": "/personInvitations/:invitationId/servicePackages",
+      "_postman_id": "1239966-a7a46ee2-c815-903a-8530-d4e8dfd3066e",
       "request": {
         "method": "get",
         "header": [
@@ -866,15 +1088,39 @@
             "value": "application/vnd.com.covisint.platform.resourceReferences.v1+json"
           }
         ],
-        "body": {},
-        "url": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId",
+            "servicePackages"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            }
+          ]
+        },
         "description": "Returns the service packages associated to an invitation.\n\nParameters:\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-cec60641-8ba2-10eb-e250-ce2d30e3d570",
       "name": "/personInvitations/:invitationId/servicePackages/:packageId",
+      "_postman_id": "1239966-cec60641-8ba2-10eb-e250-ce2d30e3d570",
       "request": {
         "method": "put",
         "header": [
@@ -891,15 +1137,43 @@
             "value": "application/vnd.com.covisint.platform.resourceReferences.v1+json"
           }
         ],
-        "body": {},
-        "url": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId",
+            "servicePackages",
+            ":packageId"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            },
+            {
+              "key": "packageId"
+            }
+          ]
+        },
         "description": "Sets a package as being part of an invitation.\n\nParameters:\n\npackageId: Unique identifier of the package\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-c0c53775-4f81-2ab7-bbaf-a23aa4406aeb",
       "name": "/personInvitations/:invitationId/servicePackages/:packageId",
+      "_postman_id": "1239966-c0c53775-4f81-2ab7-bbaf-a23aa4406aeb",
       "request": {
         "method": "delete",
         "header": [
@@ -908,15 +1182,43 @@
             "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
           }
         ],
-        "body": {},
-        "url": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId",
+            "servicePackages",
+            ":packageId"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            },
+            {
+              "key": "packageId"
+            }
+          ]
+        },
         "description": "Deletes the package from being associated to the invitation.\n\nParameters:\n\npackageId: Unique identifier of the package\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-db222d09-7067-15eb-a262-92bf88a5c7e7",
       "name": "/personInvitations/:invitationId/servicePackages/:packageId/codes",
+      "_postman_id": "1239966-db222d09-7067-15eb-a262-92bf88a5c7e7",
       "request": {
         "method": "get",
         "header": [
@@ -929,15 +1231,44 @@
             "value": "application/vnd.com.covisint.platform.service.codes.v1+json"
           }
         ],
-        "body": {},
-        "url": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId/codes",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId/codes",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId",
+            "servicePackages",
+            ":packageId",
+            "codes"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            },
+            {
+              "key": "packageId"
+            }
+          ]
+        },
         "description": "Returns the service codes associated to a service package associated to an invitation.\n\nParameters:\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-eb2d1975-68d1-ebac-8904-7d8f881f6ea8",
       "name": "/personInvitations/:invitationId/servicePackages/:packageId/codes",
+      "_postman_id": "1239966-eb2d1975-68d1-ebac-8904-7d8f881f6ea8",
       "request": {
         "method": "put",
         "header": [
@@ -954,15 +1285,44 @@
             "value": "application/vnd.com.covisint.platform.service.codes.v1+json"
           }
         ],
-        "body": {},
-        "url": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId/codes",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId/codes",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId",
+            "servicePackages",
+            ":packageId",
+            "codes"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            },
+            {
+              "key": "packageId"
+            }
+          ]
+        },
         "description": "Updates the codes for a service package associated to an invitation.\n\nParameters:\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-9b695e88-514a-e132-90e1-4765b8f33ae7",
       "name": "/personInvitations/:invitationId/servicePackages/:packageId/codes",
+      "_postman_id": "1239966-9b695e88-514a-e132-90e1-4765b8f33ae7",
       "request": {
         "method": "delete",
         "header": [
@@ -971,15 +1331,44 @@
             "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
           }
         ],
-        "body": {},
-        "url": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId/codes",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId/codes",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId",
+            "servicePackages",
+            ":packageId",
+            "codes"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            },
+            {
+              "key": "packageId"
+            }
+          ]
+        },
         "description": "Deletes the codes for a service package associated to an invitation.\n\nParameters:\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-7fefbe09-a482-b99d-b245-d2b1c9d2f55c",
       "name": "/personInvitations/tasks/accept",
+      "_postman_id": "1239966-7fefbe09-a482-b99d-b245-d2b1c9d2f55c",
       "request": {
         "method": "post",
         "header": [
@@ -988,7 +1377,10 @@
             "value": "ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/personInvitations/tasks/accept?inviteId=&createdPersonId=",
           "protocol": "https",
@@ -1021,8 +1413,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-8066b2cf-7446-c51b-04af-6059014b81c1",
       "name": "/requests",
+      "_postman_id": "1239966-8066b2cf-7446-c51b-04af-6059014b81c1",
       "request": {
         "method": "get",
         "header": [
@@ -1039,7 +1431,10 @@
             "value": "application/vnd.com.covisint.platform.person.request.v1+json"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/requests?page=&pageSize=&registrant.id=",
           "protocol": "https",
@@ -1074,8 +1469,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-e62910ff-5b79-b68e-016f-531f64a2fa66",
       "name": "/requests",
+      "_postman_id": "1239966-e62910ff-5b79-b68e-016f-531f64a2fa66",
       "request": {
         "method": "post",
         "header": [
@@ -1106,8 +1501,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-615e4c3b-5eb9-47f9-22b9-5a8519cab9ea",
       "name": "/requests/:requestId",
+      "_postman_id": "1239966-615e4c3b-5eb9-47f9-22b9-5a8519cab9ea",
       "request": {
         "method": "get",
         "header": [
@@ -1124,15 +1519,38 @@
             "value": "application/vnd.com.covisint.platform.person.request.v1+json"
           }
         ],
-        "body": {},
-        "url": "https://api.us1.covisint.com/person/v3/requests/:requestId",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/requests/:requestId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "requests",
+            ":requestId"
+          ],
+          "variable": [
+            {
+              "key": "requestId"
+            }
+          ]
+        },
         "description": "Returns a person request by id.\n\nParameters:\n\nrequestId: Unique identifier of the person request\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-7bd007bd-49f1-c901-c770-2d4861e0d69c",
       "name": "/requests/:requestId",
+      "_postman_id": "1239966-7bd007bd-49f1-c901-c770-2d4861e0d69c",
       "request": {
         "method": "delete",
         "header": [
@@ -1141,15 +1559,38 @@
             "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
           }
         ],
-        "body": {},
-        "url": "https://api.us1.covisint.com/person/v3/requests/:requestId",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/requests/:requestId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "requests",
+            ":requestId"
+          ],
+          "variable": [
+            {
+              "key": "requestId"
+            }
+          ]
+        },
         "description": "Deletes a person request.\n\nParameters:\n\nrequestId: Unique identifier of the person request\n\n"
       },
       "response": []
     },
     {
-      "_postman_id": "1239966-101d0beb-d50e-714f-8181-34653a0e770a",
       "name": "/requests/tasks/approve",
+      "_postman_id": "1239966-101d0beb-d50e-714f-8181-34653a0e770a",
       "request": {
         "method": "post",
         "header": [
@@ -1162,7 +1603,10 @@
             "value": "application/vnd.com.covisint.platform.person.request.v1+json;grantdefaultpackage=true"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/requests/tasks/approve?requestId=",
           "protocol": "https",
@@ -1191,8 +1635,8 @@
       "response": []
     },
     {
-      "_postman_id": "1239966-be492964-450a-0818-191d-5494233e0332",
       "name": "/requests/tasks/deny",
+      "_postman_id": "1239966-be492964-450a-0818-191d-5494233e0332",
       "request": {
         "method": "post",
         "header": [
@@ -1205,7 +1649,10 @@
             "value": "application/vnd.com.covisint.platform.person.request.v1+json"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
         "url": {
           "raw": "https://api.us1.covisint.com/person/v3/requests/tasks/deny?requestId=&reason=",
           "protocol": "https",
