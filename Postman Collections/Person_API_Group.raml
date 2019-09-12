@@ -1,137 +1,901 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>APIMATIC - Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    
-    
-
-    
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css" rel="stylesheet" />
-<link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/jquery.scrollbar/0.2.11/jquery.scrollbar.min.css"
-          integrity="sha256-nVXk5aDYc/D4r9OoqxZ5H6vpIAqAG5BhVuIdOihDN1c="
-          crossorigin="anonymous" />
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-
-<link href="/bundles/front-css?v=11O7jOwdtFxvmVBTuhI4jW7gL4oZccYpht3O4dmVJC41" rel="stylesheet"/>
-
-    <link href="/bundles/onboarding-css?v=m1CDG8GUR5u_P3QvyzJOWHlZKrHcnVPf442vvOhB4h41" rel="stylesheet"/>
+#%RAML 0.8
+title: Person API Group BLS
+version: 1.0
+documentation:
+- title: Person API Group BLS
+  content: "# Person API Group Functional Summary #\n\nThe Person API Group creates and updates records for end user accounts. A prerequisite to creating a person record is the Organization ID for the organization to which the person belongs. A global Person ID (CUID) is returned when a person is created. The Person ID will be required for any actions performed for a specific user.\n\n+ Sample Organization ID:  MYCOMPANY-DEMO123456\n+ Sample Person ID: DYKGC1a8\n\n### The Person Record ###\n\nThe person record contains the following information:\n\n+ Demographics such as name, address, phone numbers, timezone, preferred language and email address\n+ Administrative data such as account status and organization to which they belong\n+ Service packages granted to the user and the users organization\n+ Security data such as authentication domain, username, password, and security questions\n+ An optional template of custom attributes\n\n### Other Functions ###\n\nOther functions performed by the Person API:\n\n+ Generates email invitations to register with an optional unique invitationCode\n+ Registration\n    + Registers a user with person record in pending status \n    + Approves or denies a registration request\n+ Validation \n    + Validates the email address and/or username exists in the database \n    + Validates that passwords comply with password policies\n+ Activates/Suspends/Unsuspends user accounts\n+ Retrieves OIDC claim for a person to complete Open Id Connect (OIDC) Authorization. Query parameters are populated by Apigee gateway.\n\nFor more information, see: [Covisint](http://www.covisint.com)"
+baseUri: https://api.us1.covisint.com/person/v3
+protocols:
+- HTTPS
+baseUriParameters: {}
+/userInfo:
+  get:
+    description: >+
+      Retrieve user claims based on scope and subject id. The scope and subject id are populated by the Apigee gateway. Returns a user claim in the form of ???. This claim authenticates the user to ???.
 
 
-    
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+      Parameters:
+
+    responses:
+      200:
+        description: Success
+    headers:
+      Accept:
+        type: string
+        example: application/vnd.com.covisint.platform.userinfo.v1+json
+        required: true
+        displayName: Accept
+    queryParameters:
+      scope:
+        type: string
+        required: true
+        displayName: scope
+/persons:
+  /count:
+    get:
+      description: >+
+        Returns the count of person.
 
 
-    <!-- FAVICON START -->
-    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-    <!-- FAVICON END -->
+        Parameters:
 
-</head>
-<body>
-    <div class="container onboarding-container">
-            <div class="onboarding-container-centered ">
-                
-
-
-
-<header class="flex flex-col align-center">
-    <div class="icon">
-        <a href="/">
-            <img class="mx-auto d-block" alt="APIMATIC logo" title="Welcome to APIMATIC" src="/imgs/apimatic-logo.svg" />
-        </a>
-    </div>
-    <div class="content">
-        <p>Login to your account</p>
-    </div>
-
-</header>
-<section class="form-wrapper flex flex-col">
-
-<form action="/account/login?ReturnUrl=%2Fapi%2Ftransform%3Fformat%3Draml%26apikey%3DmONZg6E9hVHp7-WXsHucCGl-lXLvzN0t9GGEQ_s1xgrILHdXq_d50wEd8ptizzQN" id="loginForm" method="post" novalidate="True" role="form"><input name="__RequestVerificationToken" type="hidden" value="_b3E1O6xGZOsQYlxAaPHmomeneaAzgmj4zHgoV12Dk-UWLb-52IzgiEBwyRzDPdhxW2TsSH6jl7GxQ7J_r5dOKbJmZGoTEFzXT6Wc9ZqfuQ1" /><div class="validation-summary-valid" data-valmsg-summary="true"><ul><li style="display:none"></li>
-</ul></div>        <div class="form-group">
-            <label class="mb-1" for="signInInputEmail1">
-                Email
-            </label>
-            <input class="form-control form-control-sm" data-Validation="email" data-val="true" data-val-email="The Email Address field is not a valid e-mail address." data-val-required="Email is required" id="Email" name="Email" placeholder="Enter email here" required="required" tabindex="2" type="email" value="" />
-
-        </div>
-        <div class="form-group mb-0">
-            <label class="mb-1" for="signInInputPassword">
-                Password
-            </label>
-            <a class="forgot-password" href="/account/forgotpassword?Length=7">Forgot password?</a>
-            <input class="form-control extra-padding-right" data-title="Caps lock is on" data-toggle="tooltip" data-trigger="manual" data-val="true" data-val-required="Password is required" id="js-onboarding-password-field" name="Password" placeholder="Password" required="true" type="password" />
-            <i class="fa fa-eye onboarding-show-password-icon" id="js-onboarding-show-password-icon"></i>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input class="custom-control-input" data-val="true" data-val-required="The Remember me? field is required." id="customControlInline" name="RememberMe" tabindex="4" type="checkbox" value="true" /><input name="RememberMe" type="hidden" value="false" />
-                Remember me
-            </label>
-        </div>
-        <button type="submit" class="btn btn-primary btn-sm btn-block" tabindex="5">
-            Login
-        </button>
-        <a href="/account/register" class="btn btn-white btn-sm btn-block" tabindex="6">
-            Sign Up
-        </a>
-</form></section>
-
-            </div>
-    </div>
-</body>
-</html>
+      responses:
+        200:
+          description: Success
+      headers:
+        Accept:
+          type: string
+          example: text/plain
+          required: true
+          displayName: Accept
+      queryParameters:
+        id:
+          type: string
+          required: true
+          displayName: id
+        organization.id:
+          type: string
+          required: true
+          displayName: organization.id
+        username:
+          type: string
+          required: true
+          displayName: username
+        authnDomain:
+          type: string
+          required: true
+          displayName: authnDomain
+        name.given:
+          type: string
+          required: true
+          displayName: name.given
+        name.surname:
+          type: string
+          required: true
+          displayName: name.surname
+        email:
+          type: string
+          required: true
+          displayName: email
+  /roles/{personId}:
+    uriParameters:
+      personId:
+        type: string
+        example: null
+        required: true
+        displayName: personId
+    get:
+      description: "This endpoint gets the list of roles for person and also will get the only roles if we pass the onlyroles is equal to true as a media type parameter\n\nParameters:\n\npersonId: \n\n"
+      responses:
+        200:
+          description: Success
+      headers:
+        Accept:
+          type: string
+          example: application/vnd.com.covisint.platform.person.role.v1+json:onlyroles=true
+          required: true
+          displayName: Accept
+  /registration:
+    /status:
+      post:
+        description: >+
+          This endpoint used to get the user's registration status. First will check whether user is authenticated or not basis on passowrd
 
 
+          Parameters:
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        responses:
+          200:
+            description: Success
+        headers:
+          SolutionInstanceId:
+            type: string
+            example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+            required: true
+            displayName: SolutionInstanceId
+          Accept:
+            type: string
+            example: text/plain
+            required: true
+            displayName: Accept
+          Content-Type:
+            type: string
+            example: application/vnd.com.covisint.platform.authn.password.req.v1+json
+            required: true
+            displayName: Content-Type
+    /validate:
+      post:
+        description: >+
+          Validate the email address and/or user name exists. Email address and/or user name provides as parameters.
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>
 
-<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
+          Parameters:
 
-<script src="/bundles/front-js?v="></script>
+        responses:
+          200:
+            description: Success
+        headers:
+          SolutionInstanceId:
+            type: string
+            example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+            required: true
+            displayName: SolutionInstanceId
+        queryParameters:
+          emailAddress:
+            type: string
+            required: true
+            displayName: emailAddress
+          userName:
+            type: string
+            required: true
+            displayName: userName
+    post:
+      body: {}
+      description: >+
+        Register a new user. This end point create person, add password account, updating security questions(if provided) and updating the extended attributes. The status of the registered user is "pending".
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
-<script>
-    $.validate({
-        modules: 'date, security'
-    });
-</script>
-<script src="/bundles/onboarding-js?v=2h6We__p_84-tByynY6kDWiE-iuM8Pigjw1rycnNaQY1"></script>
+
+        Parameters:
+
+      responses:
+        200:
+          description: Success
+      headers:
+        SolutionInstanceId:
+          type: string
+          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+          required: true
+          displayName: SolutionInstanceId
+        Accept:
+          type: string
+          example: application/vnd.com.covisint.platform.person.password.account.v1+json
+          required: true
+          displayName: Accept
+        Content-Type:
+          type: string
+          example: application/vnd.com.covisint.platform.person.password.account.v1+json
+          required: true
+          displayName: Content-Type
+  /{personId}:
+    uriParameters:
+      personId:
+        type: string
+        example: null
+        required: true
+        displayName: personId
+    /accounts/password:
+      uriParameters: {}
+      put:
+        description: >+
+          Create or update the password account.
 
 
+          Parameters:
 
+        responses:
+          200:
+            description: Success
+        headers:
+          Accept:
+            type: string
+            example: application/vnd.com.covisint.platform.person.account.password.v1+json
+            required: true
+            displayName: Accept
+          Content-Type:
+            type: string
+            example: application/vnd.com.covisint.platform.person.account.password.v1+json
+            required: true
+            displayName: Content-Type
+      get:
+        description: >+
+          Returns the person's password account
+
+
+          Parameters:
+
+        responses:
+          200:
+            description: Success
+        headers:
+          Accept:
+            type: string
+            example: application/vnd.com.covisint.platform.person.account.password.v1+json
+            required: true
+            displayName: Accept
+    /templates:
+      uriParameters: {}
+      put:
+        description: >+
+          This endpoint updates an person with set of extended attributes. First it will verify the provided extended attributes are exists. If doesn't exist then it will throw an exception. It will always updates the provided attributes with the specified values, if attributes already exists but not provided by the client then it will ignore to update those attributes.
+
+
+          Parameters:
+
+        responses:
+          200:
+            description: Success
+        headers:
+          Accept:
+            type: string
+            example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
+            required: true
+            displayName: Accept
+          Content-Type:
+            type: string
+            example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
+            required: true
+            displayName: Content-Type
+      delete:
+        description: >+
+          This endpoint deletes an extended attribute for the person.
+
+
+          Parameters:
+
+        responses:
+          200:
+            description: Success
+        headers:
+          Accept:
+            type: string
+            example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
+            required: true
+            displayName: Accept
+        queryParameters:
+          id:
+            type: string
+            required: true
+            displayName: id
+      get:
+        description: >+
+          This endpoint gets an extended attribute templates associated with the person.
+
+
+          Parameters:
+
+        responses:
+          200:
+            description: Success
+        headers:
+          Accept:
+            type: string
+            example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
+            required: true
+            displayName: Accept
+    get:
+      description: >+
+        Returns a person by id.
+
+
+        Parameters:
+
+
+        personId: The person's unique identifier.
+
+      responses:
+        200:
+          description: Success
+      headers:
+        Accept:
+          type: string
+          example: application/vnd.com.covisint.platform.person.v1+json
+          required: true
+          displayName: Accept
+    put:
+      description: >+
+        Updates a person's base demographical properties.
+
+
+        Parameters:
+
+
+        personId: The person's unique identifier.
+
+      responses:
+        200:
+          description: Success
+      headers:
+        Accept:
+          type: string
+          example: application/vnd.com.covisint.platform.person.v1+json
+          required: true
+          displayName: Accept
+        Content-Type:
+          type: string
+          example: application/vnd.com.covisint.platform.person.v1+json
+          required: true
+          displayName: Content-Type
+  /password/validate:
+    post:
+      description: >+
+        collection endpoint to validate password against policy resources retrieved by using InviteId and orgnizationId.
+
+
+        Parameters:
+
+      responses:
+        200:
+          description: Success
+      headers:
+        SolutionInstanceId:
+          type: string
+          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+          required: true
+          displayName: SolutionInstanceId
+        Accept:
+          type: string
+          example: application/vnd.com.covisint.platform.password.validation.response.v1+json
+          required: true
+          displayName: Accept
+        Content-type:
+          type: string
+          example: application/vnd.com.covisint.platform.password.validation.v1+json
+          required: true
+          displayName: Content-type
+  /organizations/{organizationId}/securityAdmins:
+    uriParameters:
+      organizationId:
+        type: string
+        example: null
+        required: true
+        displayName: organizationId
+    get:
+      description: "Searches security admins according to the organization id provided.\n\nParameters:\n\norganizationId: \n\n"
+      responses:
+        200:
+          description: Success
+      headers:
+        Accept:
+          type: string
+          example: application/vnd.com.covisint.platform.person.v1+json
+          required: true
+          displayName: Accept
+      queryParameters:
+        page:
+          type: string
+          required: true
+          displayName: page
+        pageSize:
+          type: string
+          required: true
+          displayName: pageSize
+  /tasks:
+    /activate:
+      post:
+        description: >+
+          Activate a person that is in pending status.
+
+
+          Parameters:
+
+        responses:
+          200:
+            description: Success
+        queryParameters:
+          personId:
+            type: string
+            required: true
+            displayName: personId
+    /suspend:
+      post:
+        description: >+
+          Suspend a person that is in active status.
+
+
+          Parameters:
+
+        responses:
+          200:
+            description: Success
+        queryParameters:
+          personId:
+            type: string
+            required: true
+            displayName: personId
+    /unsuspend:
+      post:
+        description: >+
+          Unsuspend a person that is in suspended status.
+
+
+          Parameters:
+
+        responses:
+          200:
+            description: Success
+        queryParameters:
+          personId:
+            type: string
+            required: true
+            displayName: personId
+  get:
+    description: >+
+      Searches person resources according to the filter criteria provided. You have the option of searching for one or more persons by valid personIds. You may also search for persons matching specific parameters such as username, email, organization name, roleName and others.
+
+
+      Parameters:
+
+    responses:
+      200:
+        description: Success
+    headers:
+      Accept:
+        type: string
+        example: application/vnd.com.covisint.platform.person.v1+json
+        required: true
+        displayName: Accept
+    queryParameters:
+      page:
+        type: string
+        required: true
+        displayName: page
+      pageSize:
+        type: string
+        required: true
+        displayName: pageSize
+      id:
+        type: string
+        required: true
+        displayName: id
+      organization.id:
+        type: string
+        required: true
+        displayName: organization.id
+      username:
+        type: string
+        required: true
+        displayName: username
+      authnDomain:
+        type: string
+        required: true
+        displayName: authnDomain
+      name.given:
+        type: string
+        required: true
+        displayName: name.given
+      name.surname:
+        type: string
+        required: true
+        displayName: name.surname
+      email:
+        type: string
+        required: true
+        displayName: email
+      securityadmin:
+        type: string
+        required: true
+        displayName: securityadmin
+      roleId:
+        type: string
+        required: true
+        displayName: roleId
+      roleName:
+        type: string
+        required: true
+        displayName: roleName
+      fullName:
+        type: string
+        required: true
+        displayName: fullName
+      isRolesGranted:
+        type: string
+        required: true
+        displayName: isRolesGranted
+  post:
+    description: >+
+      Creates a new person in unactivated status.
+
+
+      Parameters:
+
+    responses:
+      200:
+        description: Success
+    headers:
+      Accept:
+        type: string
+        example: application/vnd.com.covisint.platform.person.v1+json
+        required: true
+        displayName: Accept
+      Content-Type:
+        type: string
+        example: application/vnd.com.covisint.platform.person.v1+json
+        required: true
+        displayName: Content-Type
+/personInvitations:
+  /{invitationId}:
+    uriParameters:
+      invitationId:
+        type: string
+        example: null
+        required: true
+        displayName: invitationId
+    /servicePackages:
+      uriParameters: {}
+      /{packageId}:
+        uriParameters:
+          packageId:
+            type: string
+            example: null
+            required: true
+            displayName: packageId
+        /codes:
+          uriParameters: {}
+          get:
+            description: >+
+              Returns the service codes associated to a service package associated to an invitation.
+
+
+              Parameters:
+
+            responses:
+              200:
+                description: Success
+            headers:
+              Accept:
+                type: string
+                example: application/vnd.com.covisint.platform.service.codes.v1+json
+                required: true
+                displayName: Accept
+          put:
+            description: >+
+              Updates the codes for a service package associated to an invitation.
+
+
+              Parameters:
+
+            responses:
+              200:
+                description: Success
+            headers:
+              Content-type:
+                type: string
+                example: application/vnd.com.covisint.platform.service.codes.v1+json
+                required: true
+                displayName: Content-type
+              Accept:
+                type: string
+                example: application/vnd.com.covisint.platform.service.codes.v1+json
+                required: true
+                displayName: Accept
+          delete:
+            description: >+
+              Deletes the codes for a service package associated to an invitation.
+
+
+              Parameters:
+
+            responses:
+              200:
+                description: Success
+        put:
+          description: >+
+            Sets a package as being part of an invitation.
+
+
+            Parameters:
+
+
+            packageId: Unique identifier of the package
+
+          responses:
+            200:
+              description: Success
+          headers:
+            Content-type:
+              type: string
+              example: application/vnd.com.covisint.platform.resourceReferences.v1+json
+              required: true
+              displayName: Content-type
+            Accept:
+              type: string
+              example: application/vnd.com.covisint.platform.resourceReferences.v1+json
+              required: true
+              displayName: Accept
+        delete:
+          description: >+
+            Deletes the package from being associated to the invitation.
+
+
+            Parameters:
+
+
+            packageId: Unique identifier of the package
+
+          responses:
+            200:
+              description: Success
+      get:
+        description: >+
+          Returns the service packages associated to an invitation.
+
+
+          Parameters:
+
+        responses:
+          200:
+            description: Success
+        headers:
+          Accept:
+            type: string
+            example: application/vnd.com.covisint.platform.resourceReferences.v1+json
+            required: true
+            displayName: Accept
+    get:
+      description: >+
+        Returns the person invitation by id.
+
+
+        Parameters:
+
+
+        invitationId: Unique identifier of the person invitation.
+
+      responses:
+        200:
+          description: Success
+      headers:
+        SolutionInstanceId:
+          type: string
+          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+          required: true
+          displayName: SolutionInstanceId
+        Accept:
+          type: string
+          example: application/vnd.com.covisint.platform.person.invitation.v1+json
+          required: true
+          displayName: Accept
+  /tasks/accept:
+    post:
+      description: >+
+        Accept the person invitation.  This also results in the invitation being deleted.
+
+
+        Parameters:
+
+      responses:
+        200:
+          description: Success
+      headers:
+        SolutionInstanceId:
+          type: string
+          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+          required: true
+          displayName: SolutionInstanceId
+      queryParameters:
+        inviteId:
+          type: string
+          required: true
+          displayName: inviteId
+        createdPersonId:
+          type: string
+          required: true
+          displayName: createdPersonId
+  get:
+    description: >+
+      Performs a search for person invitations.
+
+
+      Parameters:
+
+    responses:
+      200:
+        description: Success
+    headers:
+      Accept:
+        type: string
+        example: application/vnd.com.covisint.platform.person.invitation.v1+json
+        required: true
+        displayName: Accept
+    queryParameters:
+      page:
+        type: string
+        required: true
+        displayName: page
+      pageSize:
+        type: string
+        required: true
+        displayName: pageSize
+      invitor.id:
+        type: string
+        required: true
+        displayName: invitor.id
+      invitee.id:
+        type: string
+        required: true
+        displayName: invitee.id
+  post:
+    description: >+
+      Creates a new person invitation.
+
+
+      Parameters:
+
+    responses:
+      200:
+        description: Success
+    headers:
+      Accept:
+        type: string
+        example: application/vnd.com.covisint.platform.person.invitation.v1+json
+        required: true
+        displayName: Accept
+      Content-Type:
+        type: string
+        example: application/vnd.com.covisint.platform.person.invitation.v1+json
+        required: true
+        displayName: Content-Type
+/requests:
+  /{requestId}:
+    uriParameters:
+      requestId:
+        type: string
+        example: null
+        required: true
+        displayName: requestId
+    get:
+      description: >+
+        Returns a person request by id.
+
+
+        Parameters:
+
+
+        requestId: Unique identifier of the person request
+
+      responses:
+        200:
+          description: Success
+      headers:
+        SolutionInstanceId:
+          type: string
+          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+          required: true
+          displayName: SolutionInstanceId
+        Accept:
+          type: string
+          example: application/vnd.com.covisint.platform.person.request.v1+json
+          required: true
+          displayName: Accept
+    delete:
+      description: >+
+        Deletes a person request.
+
+
+        Parameters:
+
+
+        requestId: Unique identifier of the person request
+
+      responses:
+        200:
+          description: Success
+  /tasks:
+    /approve:
+      post:
+        description: >+
+          Approve a person request.
+
+
+          Parameters:
+
+        responses:
+          200:
+            description: Success
+        headers:
+          Accept:
+            type: string
+            example: application/vnd.com.covisint.platform.person.request.v1+json;grantdefaultpackage=true
+            required: true
+            displayName: Accept
+        queryParameters:
+          requestId:
+            type: string
+            required: true
+            displayName: requestId
+    /deny:
+      post:
+        description: >+
+          It will deny the person request as well as requested package and exchange package id granted the user.
+
+
+          Parameters:
+
+        responses:
+          200:
+            description: Success
+        headers:
+          Accept:
+            type: string
+            example: application/vnd.com.covisint.platform.person.request.v1+json
+            required: true
+            displayName: Accept
+        queryParameters:
+          requestId:
+            type: string
+            required: true
+            displayName: requestId
+          reason:
+            type: string
+            required: true
+            displayName: reason
+  get:
+    description: >+
+      Performs a search for person registration requests.
+
+
+      Parameters:
+
+    responses:
+      200:
+        description: Success
+    headers:
+      SolutionInstanceId:
+        type: string
+        example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+        required: true
+        displayName: SolutionInstanceId
+      Accept:
+        type: string
+        example: application/vnd.com.covisint.platform.person.request.v1+json
+        required: true
+        displayName: Accept
+    queryParameters:
+      page:
+        type: string
+        required: true
+        displayName: page
+      pageSize:
+        type: string
+        required: true
+        displayName: pageSize
+      registrant.id:
+        type: string
+        required: true
+        displayName: registrant.id
+  post:
+    description: >+
+      Creates a new person request.
+
+
+      Parameters:
+
+    responses:
+      200:
+        description: Success
+    headers:
+      SolutionInstanceId:
+        type: string
+        example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
+        required: true
+        displayName: SolutionInstanceId
+      Accept:
+        type: string
+        example: application/vnd.com.covisint.platform.person.request.v1+json
+        required: true
+        displayName: Accept
+      Content-Type:
+        type: string
+        example: application/vnd.com.covisint.platform.person.request.v1+json
+        required: true
+        displayName: Content-Type
