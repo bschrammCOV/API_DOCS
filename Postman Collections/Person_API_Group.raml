@@ -150,7 +150,17 @@ baseUriParameters: {}
             required: true
             displayName: userName
     post:
-      body: {}
+      body:
+        text/plain:
+          schema: |
+            {
+
+              "example": "{ \"abc\" ; \"def\"}",
+
+              "type": "string"
+
+            }
+          example: '{ "abc" ; "def"}'
       description: >+
         Register a new user. This end point create person, add password account, updating security questions(if provided) and updating the extended attributes. The status of the registered user is "pending".
 
