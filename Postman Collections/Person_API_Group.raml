@@ -1,908 +1,1688 @@
-#%RAML 0.8
-title: Person API Group BLS
-version: 1.0
-documentation:
-- title: Person API Group BLS
-  content: "# Person API Group Functional Summary #\n\nThe Person API Group creates and updates records for end user accounts. A prerequisite to creating a person record is the Organization ID for the organization to which the person belongs. A global Person ID (CUID) is returned when a person is created. The Person ID will be required for any actions performed for a specific user.\n\n+ Sample Organization ID:  MYCOMPANY-DEMO123456\n+ Sample Person ID: DYKGC1a8\n\n### The Person Record ###\n\nThe person record contains the following information:\n\n+ Demographics such as name, address, phone numbers, timezone, preferred language and email address\n+ Administrative data such as account status and organization to which they belong\n+ Service packages granted to the user and the users organization\n+ Security data such as authentication domain, username, password, and security questions\n+ An optional template of custom attributes\n\n### Other Functions ###\n\nOther functions performed by the Person API:\n\n+ Generates email invitations to register with an optional unique invitationCode\n+ Registration\n    + Registers a user with person record in pending status \n    + Approves or denies a registration request\n+ Validation \n    + Validates the email address and/or username exists in the database \n    + Validates that passwords comply with password policies\n+ Activates/Suspends/Unsuspends user accounts\n+ Retrieves OIDC claim for a person to complete Open Id Connect (OIDC) Authorization. Query parameters are populated by Apigee gateway.\n\nFor more information, see: [Covisint](http://www.covisint.com)"
-baseUri: https://api.us1.covisint.com/person/v3
-protocols:
-- HTTPS
-baseUriParameters: {}
-/userInfo:
-  get:
-    description: >+
-      Retrieve user claims based on scope and subject id. The scope and subject id are populated by the Apigee gateway. Returns a user claim in the form of ???. This claim authenticates the user to ???.
-
-
-      Parameters:
-
-    responses:
-      200:
-        description: Success
-    headers:
-      Accept:
-        type: string
-        example: application/vnd.com.covisint.platform.userinfo.v1+json
-        required: true
-        displayName: Accept
-    queryParameters:
-      scope:
-        type: string
-        required: true
-        displayName: scope
-/persons:
-  /count:
-    get:
-      description: >+
-        Returns the count of person.
-
-
-        Parameters:
-
-      responses:
-        200:
-          description: Success
-      headers:
-        Accept:
-          type: string
-          example: text/plain
-          required: true
-          displayName: Accept
-      queryParameters:
-        id:
-          type: string
-          required: true
-          displayName: id
-        organization.id:
-          type: string
-          required: true
-          displayName: organization.id
-        username:
-          type: string
-          required: true
-          displayName: username
-        authnDomain:
-          type: string
-          required: true
-          displayName: authnDomain
-        name.given:
-          type: string
-          required: true
-          displayName: name.given
-        name.surname:
-          type: string
-          required: true
-          displayName: name.surname
-        email:
-          type: string
-          required: true
-          displayName: email
-  /roles/{personId}:
-    uriParameters:
-      personId:
-        type: string
-        example: null
-        required: true
-        displayName: personId
-    get:
-      description: "This endpoint gets the list of roles for person and also will get the only roles if we pass the onlyroles is equal to true as a media type parameter\n\nParameters:\n\npersonId: \n\n"
-      responses:
-        200:
-          description: Success
-      headers:
-        Accept:
-          type: string
-          example: application/vnd.com.covisint.platform.person.role.v1+json:onlyroles=true
-          required: true
-          displayName: Accept
-  /registration:
-    /status:
-      post:
-        description: >+
-          This endpoint used to get the user's registration status. First will check whether user is authenticated or not basis on passowrd
-
-
-          Parameters:
-
-        responses:
-          200:
-            description: Success
-        headers:
-          SolutionInstanceId:
-            type: string
-            example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            required: true
-            displayName: SolutionInstanceId
-          Accept:
-            type: string
-            example: text/plain
-            required: true
-            displayName: Accept
-          Content-Type:
-            type: string
-            example: application/vnd.com.covisint.platform.authn.password.req.v1+json
-            required: true
-            displayName: Content-Type
-    /validate:
-      post:
-        description: >+
-          Validate the email address and/or user name exists. Email address and/or user name provides as parameters.
-
-
-          Parameters:
-
-        responses:
-          200:
-            description: Success
-        headers:
-          SolutionInstanceId:
-            type: string
-            example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-            required: true
-            displayName: SolutionInstanceId
-        queryParameters:
-          emailAddress:
-            type: string
-            required: true
-            displayName: emailAddress
-          userName:
-            type: string
-            required: true
-            displayName: userName
-    post:
-      body:
-        application/vnd.com.covisint.platform.person.password.account.v1+json:
-          schema: |
+{
+  "info": {
+    "_postman_id": "1239966-6f9ad3db-b48d-9492-b2e5-b84fa591488d",
+    "name": "Person API Group BLS",
+    "description": "# Person API Group Functional Summary #\n\nThe Person API Group creates and updates records for end user accounts. A prerequisite to creating a person record is the Organization ID for the organization to which the person belongs. A global Person ID (CUID) is returned when a person is created. The Person ID will be required for any actions performed for a specific user.\n\n+ Sample Organization ID:  MYCOMPANY-DEMO123456\n+ Sample Person ID: DYKGC1a8\n\n### The Person Record ###\n\nThe person record contains the following information:\n\n+ Demographics such as name, address, phone numbers, timezone, preferred language and email address\n+ Administrative data such as account status and organization to which they belong\n+ Service packages granted to the user and the users organization\n+ Security data such as authentication domain, username, password, and security questions\n+ An optional template of custom attributes\n\n### Other Functions ###\n\nOther functions performed by the Person API:\n\n+ Generates email invitations to register with an optional unique invitationCode\n+ Registration\n    + Registers a user with person record in pending status \n    + Approves or denies a registration request\n+ Validation \n    + Validates the email address and/or username exists in the database \n    + Validates that passwords comply with password policies\n+ Activates/Suspends/Unsuspends user accounts\n+ Retrieves OIDC claim for a person to complete Open Id Connect (OIDC) Authorization. Query parameters are populated by Apigee gateway.\n\nFor more information, see: [Covisint](http://www.covisint.com) \n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "/userInfo",
+      "_postman_id": "1239966-ce132c8f-b0d1-a161-00b2-72d24613412b",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.userinfo.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/userInfo?scope=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "userInfo"
+          ],
+          "query": [
             {
-              "example": "{ \"abc\" ; \"def\"}",
-              "type": "string"
+              "key": "scope",
+              "value": ""
             }
-          example: '{ "abc" ; "def"}'
-      description: >+
-        Register a new user. This end point create person, add password account, updating security questions(if provided) and updating the extended attributes. The status of the registered user is "pending".
-
-
-        Parameters:
-
-      responses:
-        200:
-          description: Success
-      headers:
-        SolutionInstanceId:
-          type: string
-          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          required: true
-          displayName: SolutionInstanceId
-        Accept:
-          type: string
-          example: application/vnd.com.covisint.platform.person.password.account.v1+json
-          required: true
-          displayName: Accept
-        Content-Type:
-          type: string
-          example: application/vnd.com.covisint.platform.person.password.account.v1+json
-          required: true
-          displayName: Content-Type
-  /{personId}:
-    uriParameters:
-      personId:
-        type: string
-        example: null
-        required: true
-        displayName: personId
-    /accounts/password:
-      uriParameters: {}
-      put:
-        description: >+
-          Create or update the password account.
-
-
-          Parameters:
-
-        responses:
-          200:
-            description: Success
-        headers:
-          Accept:
-            type: string
-            example: application/vnd.com.covisint.platform.person.account.password.v1+json
-            required: true
-            displayName: Accept
-          Content-Type:
-            type: string
-            example: application/vnd.com.covisint.platform.person.account.password.v1+json
-            required: true
-            displayName: Content-Type
-      get:
-        description: >+
-          Returns the person's password account
-
-
-          Parameters:
-
-        responses:
-          200:
-            description: Success
-        headers:
-          Accept:
-            type: string
-            example: application/vnd.com.covisint.platform.person.account.password.v1+json
-            required: true
-            displayName: Accept
-    /templates:
-      uriParameters: {}
-      put:
-        description: >+
-          This endpoint updates an person with set of extended attributes. First it will verify the provided extended attributes are exists. If doesn't exist then it will throw an exception. It will always updates the provided attributes with the specified values, if attributes already exists but not provided by the client then it will ignore to update those attributes.
-
-
-          Parameters:
-
-        responses:
-          200:
-            description: Success
-        headers:
-          Accept:
-            type: string
-            example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
-            required: true
-            displayName: Accept
-          Content-Type:
-            type: string
-            example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
-            required: true
-            displayName: Content-Type
-      delete:
-        description: >+
-          This endpoint deletes an extended attribute for the person.
-
-
-          Parameters:
-
-        responses:
-          200:
-            description: Success
-        headers:
-          Accept:
-            type: string
-            example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
-            required: true
-            displayName: Accept
-        queryParameters:
-          id:
-            type: string
-            required: true
-            displayName: id
-      get:
-        description: >+
-          This endpoint gets an extended attribute templates associated with the person.
-
-
-          Parameters:
-
-        responses:
-          200:
-            description: Success
-        headers:
-          Accept:
-            type: string
-            example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
-            required: true
-            displayName: Accept
-    get:
-      description: >+
-        Returns a person by id.
-
-
-        Parameters:
-
-
-        personId: The person's unique identifier.
-
-      responses:
-        200:
-          description: Success
-      headers:
-        Accept:
-          type: string
-          example: application/vnd.com.covisint.platform.person.v1+json
-          required: true
-          displayName: Accept
-    put:
-      description: >+
-        Updates a person's base demographical properties.
-
-
-        Parameters:
-
-
-        personId: The person's unique identifier.
-
-      responses:
-        200:
-          description: Success
-      headers:
-        Accept:
-          type: string
-          example: application/vnd.com.covisint.platform.person.v1+json
-          required: true
-          displayName: Accept
-        Content-Type:
-          type: string
-          example: application/vnd.com.covisint.platform.person.v1+json
-          required: true
-          displayName: Content-Type
-  /password/validate:
-    post:
-      description: >+
-        collection endpoint to validate password against policy resources retrieved by using InviteId and orgnizationId.
-
-
-        Parameters:
-
-      responses:
-        200:
-          description: Success
-      headers:
-        SolutionInstanceId:
-          type: string
-          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          required: true
-          displayName: SolutionInstanceId
-        Accept:
-          type: string
-          example: application/vnd.com.covisint.platform.password.validation.response.v1+json
-          required: true
-          displayName: Accept
-        Content-type:
-          type: string
-          example: application/vnd.com.covisint.platform.password.validation.v1+json
-          required: true
-          displayName: Content-type
-  /organizations/{organizationId}/securityAdmins:
-    uriParameters:
-      organizationId:
-        type: string
-        example: null
-        required: true
-        displayName: organizationId
-    get:
-      description: "Searches security admins according to the organization id provided.\n\nParameters:\n\norganizationId: \n\n"
-      responses:
-        200:
-          description: Success
-      headers:
-        Accept:
-          type: string
-          example: application/vnd.com.covisint.platform.person.v1+json
-          required: true
-          displayName: Accept
-      queryParameters:
-        page:
-          type: string
-          required: true
-          displayName: page
-        pageSize:
-          type: string
-          required: true
-          displayName: pageSize
-  /tasks:
-    /activate:
-      post:
-        description: >+
-          Activate a person that is in pending status.
-
-
-          Parameters:
-
-        responses:
-          200:
-            description: Success
-        queryParameters:
-          personId:
-            type: string
-            required: true
-            displayName: personId
-    /suspend:
-      post:
-        description: >+
-          Suspend a person that is in active status.
-
-
-          Parameters:
-
-        responses:
-          200:
-            description: Success
-        queryParameters:
-          personId:
-            type: string
-            required: true
-            displayName: personId
-    /unsuspend:
-      post:
-        description: >+
-          Unsuspend a person that is in suspended status.
-
-
-          Parameters:
-
-        responses:
-          200:
-            description: Success
-        queryParameters:
-          personId:
-            type: string
-            required: true
-            displayName: personId
-  get:
-    description: >+
-      Searches person resources according to the filter criteria provided. You have the option of searching for one or more persons by valid personIds. You may also search for persons matching specific parameters such as username, email, organization name, roleName and others.
-
-
-      Parameters:
-
-    responses:
-      200:
-        description: Success
-    headers:
-      Accept:
-        type: string
-        example: application/vnd.com.covisint.platform.person.v1+json
-        required: true
-        displayName: Accept
-    queryParameters:
-      page:
-        type: string
-        required: true
-        displayName: page
-      pageSize:
-        type: string
-        required: true
-        displayName: pageSize
-      id:
-        type: string
-        required: true
-        displayName: id
-      organization.id:
-        type: string
-        required: true
-        displayName: organization.id
-      username:
-        type: string
-        required: true
-        displayName: username
-      authnDomain:
-        type: string
-        required: true
-        displayName: authnDomain
-      name.given:
-        type: string
-        required: true
-        displayName: name.given
-      name.surname:
-        type: string
-        required: true
-        displayName: name.surname
-      email:
-        type: string
-        required: true
-        displayName: email
-      securityadmin:
-        type: string
-        required: true
-        displayName: securityadmin
-      roleId:
-        type: string
-        required: true
-        displayName: roleId
-      roleName:
-        type: string
-        required: true
-        displayName: roleName
-      fullName:
-        type: string
-        required: true
-        displayName: fullName
-      isRolesGranted:
-        type: string
-        required: true
-        displayName: isRolesGranted
-  post:
-    description: >+
-      Creates a new person in unactivated status.
-
-
-      Parameters:
-
-    responses:
-      200:
-        description: Success
-    headers:
-      Accept:
-        type: string
-        example: application/vnd.com.covisint.platform.person.v1+json
-        required: true
-        displayName: Accept
-      Content-Type:
-        type: string
-        example: application/vnd.com.covisint.platform.person.v1+json
-        required: true
-        displayName: Content-Type
-/personInvitations:
-  /{invitationId}:
-    uriParameters:
-      invitationId:
-        type: string
-        example: null
-        required: true
-        displayName: invitationId
-    /servicePackages:
-      uriParameters: {}
-      /{packageId}:
-        uriParameters:
-          packageId:
-            type: string
-            example: null
-            required: true
-            displayName: packageId
-        /codes:
-          uriParameters: {}
-          get:
-            description: >+
-              Returns the service codes associated to a service package associated to an invitation.
-
-
-              Parameters:
-
-            responses:
-              200:
-                description: Success
-            headers:
-              Accept:
-                type: string
-                example: application/vnd.com.covisint.platform.service.codes.v1+json
-                required: true
-                displayName: Accept
-          put:
-            description: >+
-              Updates the codes for a service package associated to an invitation.
-
-
-              Parameters:
-
-            responses:
-              200:
-                description: Success
-            headers:
-              Content-type:
-                type: string
-                example: application/vnd.com.covisint.platform.service.codes.v1+json
-                required: true
-                displayName: Content-type
-              Accept:
-                type: string
-                example: application/vnd.com.covisint.platform.service.codes.v1+json
-                required: true
-                displayName: Accept
-          delete:
-            description: >+
-              Deletes the codes for a service package associated to an invitation.
-
-
-              Parameters:
-
-            responses:
-              200:
-                description: Success
-        put:
-          description: >+
-            Sets a package as being part of an invitation.
-
-
-            Parameters:
-
-
-            packageId: Unique identifier of the package
-
-          responses:
-            200:
-              description: Success
-          headers:
-            Content-type:
-              type: string
-              example: application/vnd.com.covisint.platform.resourceReferences.v1+json
-              required: true
-              displayName: Content-type
-            Accept:
-              type: string
-              example: application/vnd.com.covisint.platform.resourceReferences.v1+json
-              required: true
-              displayName: Accept
-        delete:
-          description: >+
-            Deletes the package from being associated to the invitation.
-
-
-            Parameters:
-
-
-            packageId: Unique identifier of the package
-
-          responses:
-            200:
-              description: Success
-      get:
-        description: >+
-          Returns the service packages associated to an invitation.
-
-
-          Parameters:
-
-        responses:
-          200:
-            description: Success
-        headers:
-          Accept:
-            type: string
-            example: application/vnd.com.covisint.platform.resourceReferences.v1+json
-            required: true
-            displayName: Accept
-    get:
-      description: >+
-        Returns the person invitation by id.
-
-
-        Parameters:
-
-
-        invitationId: Unique identifier of the person invitation.
-
-      responses:
-        200:
-          description: Success
-      headers:
-        SolutionInstanceId:
-          type: string
-          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          required: true
-          displayName: SolutionInstanceId
-        Accept:
-          type: string
-          example: application/vnd.com.covisint.platform.person.invitation.v1+json
-          required: true
-          displayName: Accept
-  /tasks/accept:
-    post:
-      description: >+
-        Accept the person invitation.  This also results in the invitation being deleted.
-
-
-        Parameters:
-
-      responses:
-        200:
-          description: Success
-      headers:
-        SolutionInstanceId:
-          type: string
-          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          required: true
-          displayName: SolutionInstanceId
-      queryParameters:
-        inviteId:
-          type: string
-          required: true
-          displayName: inviteId
-        createdPersonId:
-          type: string
-          required: true
-          displayName: createdPersonId
-  get:
-    description: >+
-      Performs a search for person invitations.
-
-
-      Parameters:
-
-    responses:
-      200:
-        description: Success
-    headers:
-      Accept:
-        type: string
-        example: application/vnd.com.covisint.platform.person.invitation.v1+json
-        required: true
-        displayName: Accept
-    queryParameters:
-      page:
-        type: string
-        required: true
-        displayName: page
-      pageSize:
-        type: string
-        required: true
-        displayName: pageSize
-      invitor.id:
-        type: string
-        required: true
-        displayName: invitor.id
-      invitee.id:
-        type: string
-        required: true
-        displayName: invitee.id
-  post:
-    description: >+
-      Creates a new person invitation.
-
-
-      Parameters:
-
-    responses:
-      200:
-        description: Success
-    headers:
-      Accept:
-        type: string
-        example: application/vnd.com.covisint.platform.person.invitation.v1+json
-        required: true
-        displayName: Accept
-      Content-Type:
-        type: string
-        example: application/vnd.com.covisint.platform.person.invitation.v1+json
-        required: true
-        displayName: Content-Type
-/requests:
-  /{requestId}:
-    uriParameters:
-      requestId:
-        type: string
-        example: null
-        required: true
-        displayName: requestId
-    get:
-      description: >+
-        Returns a person request by id.
-
-
-        Parameters:
-
-
-        requestId: Unique identifier of the person request
-
-      responses:
-        200:
-          description: Success
-      headers:
-        SolutionInstanceId:
-          type: string
-          example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-          required: true
-          displayName: SolutionInstanceId
-        Accept:
-          type: string
-          example: application/vnd.com.covisint.platform.person.request.v1+json
-          required: true
-          displayName: Accept
-    delete:
-      description: >+
-        Deletes a person request.
-
-
-        Parameters:
-
-
-        requestId: Unique identifier of the person request
-
-      responses:
-        200:
-          description: Success
-  /tasks:
-    /approve:
-      post:
-        description: >+
-          Approve a person request.
-
-
-          Parameters:
-
-        responses:
-          200:
-            description: Success
-        headers:
-          Accept:
-            type: string
-            example: application/vnd.com.covisint.platform.person.request.v1+json;grantdefaultpackage=true
-            required: true
-            displayName: Accept
-        queryParameters:
-          requestId:
-            type: string
-            required: true
-            displayName: requestId
-    /deny:
-      post:
-        description: >+
-          It will deny the person request as well as requested package and exchange package id granted the user.
-
-
-          Parameters:
-
-        responses:
-          200:
-            description: Success
-        headers:
-          Accept:
-            type: string
-            example: application/vnd.com.covisint.platform.person.request.v1+json
-            required: true
-            displayName: Accept
-        queryParameters:
-          requestId:
-            type: string
-            required: true
-            displayName: requestId
-          reason:
-            type: string
-            required: true
-            displayName: reason
-  get:
-    description: >+
-      Performs a search for person registration requests.
-
-
-      Parameters:
-
-    responses:
-      200:
-        description: Success
-    headers:
-      SolutionInstanceId:
-        type: string
-        example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-        required: true
-        displayName: SolutionInstanceId
-      Accept:
-        type: string
-        example: application/vnd.com.covisint.platform.person.request.v1+json
-        required: true
-        displayName: Accept
-    queryParameters:
-      page:
-        type: string
-        required: true
-        displayName: page
-      pageSize:
-        type: string
-        required: true
-        displayName: pageSize
-      registrant.id:
-        type: string
-        required: true
-        displayName: registrant.id
-  post:
-    description: >+
-      Creates a new person request.
-
-
-      Parameters:
-
-    responses:
-      200:
-        description: Success
-    headers:
-      SolutionInstanceId:
-        type: string
-        example: ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk
-        required: true
-        displayName: SolutionInstanceId
-      Accept:
-        type: string
-        example: application/vnd.com.covisint.platform.person.request.v1+json
-        required: true
-        displayName: Accept
-      Content-Type:
-        type: string
-        example: application/vnd.com.covisint.platform.person.request.v1+json
-        required: true
-        displayName: Content-Type
+          ]
+        },
+        "description": "Retrieve user claims based on scope and subject id. The scope and subject id are populated by the Apigee gateway. Returns a user claim in the form of ???. This claim authenticates the user to ???.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons",
+      "_postman_id": "1239966-10f8ca67-a701-6d56-c54b-8adb8dc28b34",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons?page=&pageSize=&id=&organization.id=&username=&authnDomain=&name.given=&name.surname=&email=&securityadmin=&roleId=&roleName=&fullName=&isRolesGranted=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": ""
+            },
+            {
+              "key": "pageSize",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "organization.id",
+              "value": ""
+            },
+            {
+              "key": "username",
+              "value": ""
+            },
+            {
+              "key": "authnDomain",
+              "value": ""
+            },
+            {
+              "key": "name.given",
+              "value": ""
+            },
+            {
+              "key": "name.surname",
+              "value": ""
+            },
+            {
+              "key": "email",
+              "value": ""
+            },
+            {
+              "key": "securityadmin",
+              "value": ""
+            },
+            {
+              "key": "roleId",
+              "value": ""
+            },
+            {
+              "key": "roleName",
+              "value": ""
+            },
+            {
+              "key": "fullName",
+              "value": ""
+            },
+            {
+              "key": "isRolesGranted",
+              "value": ""
+            }
+          ]
+        },
+        "description": "Searches person resources according to the filter criteria provided. You have the option of searching for one or more persons by valid personIds. You may also search for persons matching specific parameters such as username, email, organization name, roleName and others.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons",
+      "_postman_id": "1239966-d8aa5462-41c3-95ba-484f-9fe21918cf36",
+      "request": {
+        "method": "post",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.v1+json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.com.covisint.platform.person.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": "https://api.us1.covisint.com/person/v3/persons",
+        "description": "Creates a new person in unactivated status.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/count",
+      "_postman_id": "1239966-5d0e84d7-db61-fae9-d8c8-84faa3b56ee2",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "text/plain"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/count?id=&organization.id=&username=&authnDomain=&name.given=&name.surname=&email=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            "count"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "organization.id",
+              "value": ""
+            },
+            {
+              "key": "username",
+              "value": ""
+            },
+            {
+              "key": "authnDomain",
+              "value": ""
+            },
+            {
+              "key": "name.given",
+              "value": ""
+            },
+            {
+              "key": "name.surname",
+              "value": ""
+            },
+            {
+              "key": "email",
+              "value": ""
+            }
+          ]
+        },
+        "description": "Returns the count of person.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/roles/:personId",
+      "_postman_id": "1239966-77c060e4-d58c-d22c-0ad9-f043031dd687",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.role.v1+json:onlyroles=true"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/roles/:personId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            "roles",
+            ":personId"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
+        "description": "This endpoint gets the list of roles for person and also will get the only roles if we pass the onlyroles is equal to true as a media type parameter\n\nParameters:\n\npersonId: \n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/registration",
+      "_postman_id": "1239966-1e74ab1d-5b76-5c3a-5033-d1b68e7249c2",
+      "request": {
+        "method": "post",
+        "header": [
+          {
+            "key": "SolutionInstanceId",
+            "value": "ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.password.account.v1+json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.com.covisint.platform.person.password.account.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"abc\" ; \"def\"}"
+        },
+        "url": "https://api.us1.covisint.com/person/v3/persons/registration",
+        "description": "Register a new user. This end point create person, add password account, updating security questions(if provided) and updating the extended attributes. The status of the registered user is \"pending\".\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/registration/status",
+      "_postman_id": "1239966-ae340e1b-81ef-ebae-c665-5cd62d8c2176",
+      "request": {
+        "method": "post",
+        "header": [
+          {
+            "key": "SolutionInstanceId",
+            "value": "ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "text/plain"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.com.covisint.platform.authn.password.req.v1+json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.com.covisint.platform.authn.password.req.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": "https://api.us1.covisint.com/person/v3/persons/registration/status",
+        "description": "This endpoint used to get the user's registration status. First will check whether user is authenticated or not basis on passowrd\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/registration/validate",
+      "_postman_id": "1239966-544249db-8bae-fa7a-0352-5a04b07f06bf",
+      "request": {
+        "method": "post",
+        "header": [
+          {
+            "key": "SolutionInstanceId",
+            "value": "ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/registration/validate?emailAddress=&userName=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            "registration",
+            "validate"
+          ],
+          "query": [
+            {
+              "key": "emailAddress",
+              "value": ""
+            },
+            {
+              "key": "userName",
+              "value": ""
+            }
+          ]
+        },
+        "description": "Validate the email address and/or user name exists. Email address and/or user name provides as parameters.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/:personId",
+      "_postman_id": "1239966-2e08a13d-656c-e7b1-27b8-ee2202b5230a",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/:personId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            ":personId"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
+        "description": "Returns a person by id.\n\nParameters:\n\npersonId: The person's unique identifier.\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/:personId",
+      "_postman_id": "1239966-fb782612-b650-4b0f-e96a-4a6ba7307319",
+      "request": {
+        "method": "put",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.v1+json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.com.covisint.platform.person.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/:personId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            ":personId"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
+        "description": "Updates a person's base demographical properties.\n\nParameters:\n\npersonId: The person's unique identifier.\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/:personId/accounts/password",
+      "_postman_id": "1239966-0dc2ee1c-241c-04ed-7e34-ea356889496a",
+      "request": {
+        "method": "put",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.account.password.v1+json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.com.covisint.platform.person.account.password.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/:personId/accounts/password",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            ":personId",
+            "accounts",
+            "password"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
+        "description": "Create or update the password account.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/:personId/accounts/password",
+      "_postman_id": "1239966-f60c7d1d-b7d4-1db7-696c-86f9d9641edb",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.account.password.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/:personId/accounts/password",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            ":personId",
+            "accounts",
+            "password"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
+        "description": "Returns the person's password account\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/:personId/templates",
+      "_postman_id": "1239966-f76b23b5-3d68-e140-8394-7d9beacc8c07",
+      "request": {
+        "method": "put",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.attribute.template.v1+json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.com.covisint.platform.person.attribute.template.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/:personId/templates",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            ":personId",
+            "templates"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
+        "description": "This endpoint updates an person with set of extended attributes. First it will verify the provided extended attributes are exists. If doesn't exist then it will throw an exception. It will always updates the provided attributes with the specified values, if attributes already exists but not provided by the client then it will ignore to update those attributes.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/:personId/templates",
+      "_postman_id": "1239966-a89fe8af-71c7-3e9e-29cc-d69ed2272c99",
+      "request": {
+        "method": "delete",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.attribute.template.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/:personId/templates?id=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            ":personId",
+            "templates"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
+        "description": "This endpoint deletes an extended attribute for the person.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/:personId/templates",
+      "_postman_id": "1239966-ad805088-ba02-c85c-1e54-880be9a8f777",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.attribute.template.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/:personId/templates",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            ":personId",
+            "templates"
+          ],
+          "variable": [
+            {
+              "key": "personId"
+            }
+          ]
+        },
+        "description": "This endpoint gets an extended attribute templates associated with the person.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/tasks/activate",
+      "_postman_id": "1239966-ed5af33c-ff4e-5622-c367-992947b65a22",
+      "request": {
+        "method": "post",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/tasks/activate?personId=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            "tasks",
+            "activate"
+          ],
+          "query": [
+            {
+              "key": "personId",
+              "value": ""
+            }
+          ]
+        },
+        "description": "Activate a person that is in pending status.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/tasks/suspend",
+      "_postman_id": "1239966-4671d717-22c1-1396-5625-f0e575568dae",
+      "request": {
+        "method": "post",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/tasks/suspend?personId=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            "tasks",
+            "suspend"
+          ],
+          "query": [
+            {
+              "key": "personId",
+              "value": ""
+            }
+          ]
+        },
+        "description": "Suspend a person that is in active status.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/tasks/unsuspend",
+      "_postman_id": "1239966-30ca76c5-9d40-b3ed-0177-a1e0861920cf",
+      "request": {
+        "method": "post",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/tasks/unsuspend?personId=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            "tasks",
+            "unsuspend"
+          ],
+          "query": [
+            {
+              "key": "personId",
+              "value": ""
+            }
+          ]
+        },
+        "description": "Unsuspend a person that is in suspended status.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/password/validate",
+      "_postman_id": "1239966-bbfde567-d6f5-fc01-42fc-e76cc5e785ec",
+      "request": {
+        "method": "post",
+        "header": [
+          {
+            "key": "SolutionInstanceId",
+            "value": "ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.password.validation.response.v1+json"
+          },
+          {
+            "key": "Content-type",
+            "value": "application/vnd.com.covisint.platform.password.validation.v1+json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.com.covisint.platform.password.validation.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": "https://api.us1.covisint.com/person/v3/persons/password/validate",
+        "description": "collection endpoint to validate password against policy resources retrieved by using InviteId and orgnizationId.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/persons/organizations/:organizationId/securityAdmins",
+      "_postman_id": "1239966-e9881557-7c35-a41f-4768-1f43b9c718fb",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/persons/organizations/:organizationId/securityAdmins?page=&pageSize=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "persons",
+            "organizations",
+            ":organizationId",
+            "securityAdmins"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": ""
+            },
+            {
+              "key": "pageSize",
+              "value": ""
+            }
+          ],
+          "variable": [
+            {
+              "key": "organizationId"
+            }
+          ]
+        },
+        "description": "Searches security admins according to the organization id provided.\n\nParameters:\n\norganizationId: \n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/personInvitations",
+      "_postman_id": "1239966-a24e762c-43c1-d722-3d95-ae77da700320",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.invitation.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations?page=&pageSize=&invitor.id=&invitee.id=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": ""
+            },
+            {
+              "key": "pageSize",
+              "value": ""
+            },
+            {
+              "key": "invitor.id",
+              "value": ""
+            },
+            {
+              "key": "invitee.id",
+              "value": ""
+            }
+          ]
+        },
+        "description": "Performs a search for person invitations.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/personInvitations",
+      "_postman_id": "1239966-c7a55514-f780-7766-f61a-ad003d797b76",
+      "request": {
+        "method": "post",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.invitation.v1+json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.com.covisint.platform.person.invitation.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": "https://api.us1.covisint.com/person/v3/personInvitations",
+        "description": "Creates a new person invitation.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/personInvitations/:invitationId",
+      "_postman_id": "1239966-cdf83b59-b717-7e0f-73bc-b9830deeb590",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "SolutionInstanceId",
+            "value": "ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.invitation.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            }
+          ]
+        },
+        "description": "Returns the person invitation by id.\n\nParameters:\n\ninvitationId: Unique identifier of the person invitation.\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/personInvitations/:invitationId/servicePackages",
+      "_postman_id": "1239966-a7a46ee2-c815-903a-8530-d4e8dfd3066e",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.resourceReferences.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId",
+            "servicePackages"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            }
+          ]
+        },
+        "description": "Returns the service packages associated to an invitation.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/personInvitations/:invitationId/servicePackages/:packageId",
+      "_postman_id": "1239966-cec60641-8ba2-10eb-e250-ce2d30e3d570",
+      "request": {
+        "method": "put",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Content-type",
+            "value": "application/vnd.com.covisint.platform.resourceReferences.v1+json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.resourceReferences.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId",
+            "servicePackages",
+            ":packageId"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            },
+            {
+              "key": "packageId"
+            }
+          ]
+        },
+        "description": "Sets a package as being part of an invitation.\n\nParameters:\n\npackageId: Unique identifier of the package\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/personInvitations/:invitationId/servicePackages/:packageId",
+      "_postman_id": "1239966-c0c53775-4f81-2ab7-bbaf-a23aa4406aeb",
+      "request": {
+        "method": "delete",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId",
+            "servicePackages",
+            ":packageId"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            },
+            {
+              "key": "packageId"
+            }
+          ]
+        },
+        "description": "Deletes the package from being associated to the invitation.\n\nParameters:\n\npackageId: Unique identifier of the package\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/personInvitations/:invitationId/servicePackages/:packageId/codes",
+      "_postman_id": "1239966-db222d09-7067-15eb-a262-92bf88a5c7e7",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.service.codes.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId/codes",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId",
+            "servicePackages",
+            ":packageId",
+            "codes"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            },
+            {
+              "key": "packageId"
+            }
+          ]
+        },
+        "description": "Returns the service codes associated to a service package associated to an invitation.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/personInvitations/:invitationId/servicePackages/:packageId/codes",
+      "_postman_id": "1239966-eb2d1975-68d1-ebac-8904-7d8f881f6ea8",
+      "request": {
+        "method": "put",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Content-type",
+            "value": "application/vnd.com.covisint.platform.service.codes.v1+json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.service.codes.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId/codes",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId",
+            "servicePackages",
+            ":packageId",
+            "codes"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            },
+            {
+              "key": "packageId"
+            }
+          ]
+        },
+        "description": "Updates the codes for a service package associated to an invitation.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/personInvitations/:invitationId/servicePackages/:packageId/codes",
+      "_postman_id": "1239966-9b695e88-514a-e132-90e1-4765b8f33ae7",
+      "request": {
+        "method": "delete",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/:invitationId/servicePackages/:packageId/codes",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            ":invitationId",
+            "servicePackages",
+            ":packageId",
+            "codes"
+          ],
+          "variable": [
+            {
+              "key": "invitationId"
+            },
+            {
+              "key": "packageId"
+            }
+          ]
+        },
+        "description": "Deletes the codes for a service package associated to an invitation.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/personInvitations/tasks/accept",
+      "_postman_id": "1239966-7fefbe09-a482-b99d-b245-d2b1c9d2f55c",
+      "request": {
+        "method": "post",
+        "header": [
+          {
+            "key": "SolutionInstanceId",
+            "value": "ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/personInvitations/tasks/accept?inviteId=&createdPersonId=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "personInvitations",
+            "tasks",
+            "accept"
+          ],
+          "query": [
+            {
+              "key": "inviteId",
+              "value": ""
+            },
+            {
+              "key": "createdPersonId",
+              "value": ""
+            }
+          ]
+        },
+        "description": "Accept the person invitation.  This also results in the invitation being deleted.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/requests",
+      "_postman_id": "1239966-8066b2cf-7446-c51b-04af-6059014b81c1",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "SolutionInstanceId",
+            "value": "ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.request.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/requests?page=&pageSize=&registrant.id=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "requests"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": ""
+            },
+            {
+              "key": "pageSize",
+              "value": ""
+            },
+            {
+              "key": "registrant.id",
+              "value": ""
+            }
+          ]
+        },
+        "description": "Performs a search for person registration requests.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/requests",
+      "_postman_id": "1239966-e62910ff-5b79-b68e-016f-531f64a2fa66",
+      "request": {
+        "method": "post",
+        "header": [
+          {
+            "key": "SolutionInstanceId",
+            "value": "ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.request.v1+json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.com.covisint.platform.person.request.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": "https://api.us1.covisint.com/person/v3/requests",
+        "description": "Creates a new person request.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/requests/:requestId",
+      "_postman_id": "1239966-615e4c3b-5eb9-47f9-22b9-5a8519cab9ea",
+      "request": {
+        "method": "get",
+        "header": [
+          {
+            "key": "SolutionInstanceId",
+            "value": "ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.request.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/requests/:requestId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "requests",
+            ":requestId"
+          ],
+          "variable": [
+            {
+              "key": "requestId"
+            }
+          ]
+        },
+        "description": "Returns a person request by id.\n\nParameters:\n\nrequestId: Unique identifier of the person request\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/requests/:requestId",
+      "_postman_id": "1239966-7bd007bd-49f1-c901-c770-2d4861e0d69c",
+      "request": {
+        "method": "delete",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/requests/:requestId",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "requests",
+            ":requestId"
+          ],
+          "variable": [
+            {
+              "key": "requestId"
+            }
+          ]
+        },
+        "description": "Deletes a person request.\n\nParameters:\n\nrequestId: Unique identifier of the person request\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/requests/tasks/approve",
+      "_postman_id": "1239966-101d0beb-d50e-714f-8181-34653a0e770a",
+      "request": {
+        "method": "post",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.request.v1+json;grantdefaultpackage=true"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/requests/tasks/approve?requestId=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "requests",
+            "tasks",
+            "approve"
+          ],
+          "query": [
+            {
+              "key": "requestId",
+              "value": ""
+            }
+          ]
+        },
+        "description": "Approve a person request.\n\nParameters:\n\n"
+      },
+      "response": []
+    },
+    {
+      "name": "/requests/tasks/deny",
+      "_postman_id": "1239966-be492964-450a-0818-191d-5494233e0332",
+      "request": {
+        "method": "post",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer ZCtYUGpYRXpET0JvVE1rZzlWV3I1Yk"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.com.covisint.platform.person.request.v1+json"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api.us1.covisint.com/person/v3/requests/tasks/deny?requestId=&reason=",
+          "protocol": "https",
+          "host": [
+            "api",
+            "us1",
+            "covisint",
+            "com"
+          ],
+          "path": [
+            "person",
+            "v3",
+            "requests",
+            "tasks",
+            "deny"
+          ],
+          "query": [
+            {
+              "key": "requestId",
+              "value": ""
+            },
+            {
+              "key": "reason",
+              "value": ""
+            }
+          ]
+        },
+        "description": "It will deny the person request as well as requested package and exchange package id granted the user.\n\nParameters:\n\n"
+      },
+      "response": []
+    }
+  ]
+}
