@@ -119,10 +119,11 @@ baseUriParameters: {}
             required: true
             displayName: Accept
           Content-Type:
-            type: string
             example: application/vnd.com.covisint.platform.authn.password.req.v1+json
             required: true
             displayName: Content-Type
+            enum:
+            - application/vnd.com.covisint.platform.authn.password.req.v1+json
     /validate:
       post:
         description: >+
@@ -179,10 +180,11 @@ baseUriParameters: {}
           required: true
           displayName: Accept
         Content-Type:
-          type: string
           example: application/vnd.com.covisint.platform.person.password.account.v1+json
           required: true
           displayName: Content-Type
+          enum:
+          - application/vnd.com.covisint.platform.person.password.account.v1+json
   /{personId}:
     uriParameters:
       personId:
@@ -209,10 +211,11 @@ baseUriParameters: {}
             required: true
             displayName: Accept
           Content-Type:
-            type: string
             example: application/vnd.com.covisint.platform.person.account.password.v1+json
             required: true
             displayName: Content-Type
+            enum:
+            - application/vnd.com.covisint.platform.person.account.password.v1+json
       get:
         description: >+
           Returns the person's password account
@@ -248,10 +251,11 @@ baseUriParameters: {}
             required: true
             displayName: Accept
           Content-Type:
-            type: string
             example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
             required: true
             displayName: Content-Type
+            enum:
+            - application/vnd.com.covisint.platform.person.attribute.template.v1+json
       delete:
         description: >+
           This endpoint deletes an extended attribute for the person.
@@ -328,10 +332,11 @@ baseUriParameters: {}
           required: true
           displayName: Accept
         Content-Type:
-          type: string
           example: application/vnd.com.covisint.platform.person.v1+json
           required: true
           displayName: Content-Type
+          enum:
+          - application/vnd.com.covisint.platform.person.v1+json
   /password/validate:
     post:
       description: >+
@@ -355,10 +360,11 @@ baseUriParameters: {}
           required: true
           displayName: Accept
         Content-type:
-          type: string
           example: application/vnd.com.covisint.platform.password.validation.v1+json
           required: true
           displayName: Content-type
+          enum:
+          - application/vnd.com.covisint.platform.password.validation.v1+json
   /organizations/{organizationId}/securityAdmins:
     uriParameters:
       organizationId:
@@ -525,10 +531,11 @@ baseUriParameters: {}
         required: true
         displayName: Accept
       Content-Type:
-        type: string
         example: application/vnd.com.covisint.platform.person.v1+json
         required: true
         displayName: Content-Type
+        enum:
+        - application/vnd.com.covisint.platform.person.v1+json
 /personInvitations:
   /{invitationId}:
     uriParameters:
@@ -576,10 +583,11 @@ baseUriParameters: {}
                 description: Success
             headers:
               Content-type:
-                type: string
                 example: application/vnd.com.covisint.platform.service.codes.v1+json
                 required: true
                 displayName: Content-type
+                enum:
+                - application/vnd.com.covisint.platform.service.codes.v1+json
               Accept:
                 type: string
                 example: application/vnd.com.covisint.platform.service.codes.v1+json
@@ -610,10 +618,11 @@ baseUriParameters: {}
               description: Success
           headers:
             Content-type:
-              type: string
               example: application/vnd.com.covisint.platform.resourceReferences.v1+json
               required: true
               displayName: Content-type
+              enum:
+              - application/vnd.com.covisint.platform.resourceReferences.v1+json
             Accept:
               type: string
               example: application/vnd.com.covisint.platform.resourceReferences.v1+json
@@ -748,10 +757,11 @@ baseUriParameters: {}
         required: true
         displayName: Accept
       Content-Type:
-        type: string
         example: application/vnd.com.covisint.platform.person.invitation.v1+json
         required: true
         displayName: Content-Type
+        enum:
+        - application/vnd.com.covisint.platform.person.invitation.v1+json
 /requests:
   /{requestId}:
     uriParameters:
@@ -902,7 +912,8 @@ baseUriParameters: {}
         required: true
         displayName: Accept
       Content-Type:
-        type: string
         example: application/vnd.com.covisint.platform.person.request.v1+json
         required: true
         displayName: Content-Type
+        enum:
+        - application/vnd.com.covisint.platform.person.request.v1+json
