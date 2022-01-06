@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: Person API Group BLS
-version: 1.0
+version: '1.0'
 documentation:
 - title: Person API Group BLS
   content: "# Person API Group Functional Summary #\n\nThe Person API Group creates and updates records for end user accounts. A prerequisite to creating a person record is the Organization ID for the organization to which the person belongs. A global Person ID (CUID) is returned when a person is created. The Person ID will be required for any actions performed for a specific user.\n\n+ Sample Organization ID:  MYCOMPANY-DEMO123456\n+ Sample Person ID: DYKGC1a8\n\n### The Person Record ###\n\nThe person record contains the following information:\n\n+ Demographics such as name, address, phone numbers, timezone, preferred language and email address\n+ Administrative data such as account status and organization to which they belong\n+ Service packages granted to the user and the users organization\n+ Security data such as authentication domain, username, password, and security questions\n+ An optional template of custom attributes\n\n### Other Functions ###\n\nOther functions performed by the Person API:\n\n+ Generates email invitations to register with an optional unique invitationCode\n+ Registration\n    + Registers a user with person record in pending status \n    + Approves or denies a registration request\n+ Validation \n    + Validates the email address and/or username exists in the database \n    + Validates that passwords comply with password policies\n+ Activates/Suspends/Unsuspends user accounts\n+ Retrieves OIDC claim for a person to complete Open Id Connect (OIDC) Authorization. Query parameters are populated by Apigee gateway.\n\nFor more information, see: [Covisint](http://www.covisint.com)"
@@ -16,9 +16,6 @@ baseUriParameters: {}
 
       Parameters:
 
-    responses:
-      200:
-        description: Success
     headers:
       Accept:
         type: string
@@ -30,6 +27,9 @@ baseUriParameters: {}
         type: string
         required: true
         displayName: scope
+    responses:
+      '200':
+        description: Success
 /persons:
   /count:
     get:
@@ -39,9 +39,6 @@ baseUriParameters: {}
 
         Parameters:
 
-      responses:
-        200:
-          description: Success
       headers:
         Accept:
           type: string
@@ -77,24 +74,27 @@ baseUriParameters: {}
           type: string
           required: true
           displayName: email
+      responses:
+        '200':
+          description: Success
   /roles/{personId}:
     uriParameters:
       personId:
         type: string
-        example: null
+        example: 'null'
         required: true
         displayName: personId
     get:
       description: "This endpoint gets the list of roles for person and also will get the only roles if we pass the onlyroles is equal to true as a media type parameter\n\nParameters:\n\npersonId: \n\n"
-      responses:
-        200:
-          description: Success
       headers:
         Accept:
           type: string
           example: application/vnd.com.covisint.platform.person.role.v1+json:onlyroles=true
           required: true
           displayName: Accept
+      responses:
+        '200':
+          description: Success
   /registration:
     /status:
       post:
@@ -104,9 +104,6 @@ baseUriParameters: {}
 
           Parameters:
 
-        responses:
-          200:
-            description: Success
         headers:
           SolutionInstanceId:
             type: string
@@ -124,6 +121,9 @@ baseUriParameters: {}
             displayName: Content-Type
             enum:
             - application/vnd.com.covisint.platform.authn.password.req.v1+json
+        responses:
+          '200':
+            description: Success
     /validate:
       post:
         description: >+
@@ -132,9 +132,6 @@ baseUriParameters: {}
 
           Parameters:
 
-        responses:
-          200:
-            description: Success
         headers:
           SolutionInstanceId:
             type: string
@@ -150,24 +147,16 @@ baseUriParameters: {}
             type: string
             required: true
             displayName: userName
+        responses:
+          '200':
+            description: Success
     post:
-      body:
-        application/vnd.com.covisint.platform.person.password.account.v1+json:
-          schema: |
-            {
-              "example": "{ \"abc\" ; \"def\"}",
-              "type": "string"
-            }
-          example: '{ "abc" ; "def"}'
       description: >+
         Register a new user. This end point create person, add password account, updating security questions(if provided) and updating the extended attributes. The status of the registered user is "pending".
 
 
         Parameters:
 
-      responses:
-        200:
-          description: Success
       headers:
         SolutionInstanceId:
           type: string
@@ -185,11 +174,22 @@ baseUriParameters: {}
           displayName: Content-Type
           enum:
           - application/vnd.com.covisint.platform.person.password.account.v1+json
+      body:
+        application/vnd.com.covisint.platform.person.password.account.v1+json:
+          schema: |
+            {
+              "example": "{ \"abc\" ; \"def\"}",
+              "type": "string"
+            }
+          example: '{ "abc" ; "def"}'
+      responses:
+        '200':
+          description: Success
   /{personId}:
     uriParameters:
       personId:
         type: string
-        example: null
+        example: 'null'
         required: true
         displayName: personId
     /accounts/password:
@@ -201,9 +201,6 @@ baseUriParameters: {}
 
           Parameters:
 
-        responses:
-          200:
-            description: Success
         headers:
           Accept:
             type: string
@@ -216,6 +213,9 @@ baseUriParameters: {}
             displayName: Content-Type
             enum:
             - application/vnd.com.covisint.platform.person.account.password.v1+json
+        responses:
+          '200':
+            description: Success
       get:
         description: >+
           Returns the person's password account
@@ -223,15 +223,15 @@ baseUriParameters: {}
 
           Parameters:
 
-        responses:
-          200:
-            description: Success
         headers:
           Accept:
             type: string
             example: application/vnd.com.covisint.platform.person.account.password.v1+json
             required: true
             displayName: Accept
+        responses:
+          '200':
+            description: Success
     /templates:
       uriParameters: {}
       put:
@@ -241,9 +241,6 @@ baseUriParameters: {}
 
           Parameters:
 
-        responses:
-          200:
-            description: Success
         headers:
           Accept:
             type: string
@@ -256,6 +253,9 @@ baseUriParameters: {}
             displayName: Content-Type
             enum:
             - application/vnd.com.covisint.platform.person.attribute.template.v1+json
+        responses:
+          '200':
+            description: Success
       delete:
         description: >+
           This endpoint deletes an extended attribute for the person.
@@ -263,9 +263,6 @@ baseUriParameters: {}
 
           Parameters:
 
-        responses:
-          200:
-            description: Success
         headers:
           Accept:
             type: string
@@ -277,6 +274,9 @@ baseUriParameters: {}
             type: string
             required: true
             displayName: id
+        responses:
+          '200':
+            description: Success
       get:
         description: >+
           This endpoint gets an extended attribute templates associated with the person.
@@ -284,15 +284,15 @@ baseUriParameters: {}
 
           Parameters:
 
-        responses:
-          200:
-            description: Success
         headers:
           Accept:
             type: string
             example: application/vnd.com.covisint.platform.person.attribute.template.v1+json
             required: true
             displayName: Accept
+        responses:
+          '200':
+            description: Success
     get:
       description: >+
         Returns a person by id.
@@ -303,15 +303,15 @@ baseUriParameters: {}
 
         personId: The person's unique identifier.
 
-      responses:
-        200:
-          description: Success
       headers:
         Accept:
           type: string
           example: application/vnd.com.covisint.platform.person.v1+json
           required: true
           displayName: Accept
+      responses:
+        '200':
+          description: Success
     put:
       description: >+
         Updates a person's base demographical properties.
@@ -322,9 +322,6 @@ baseUriParameters: {}
 
         personId: The person's unique identifier.
 
-      responses:
-        200:
-          description: Success
       headers:
         Accept:
           type: string
@@ -337,6 +334,9 @@ baseUriParameters: {}
           displayName: Content-Type
           enum:
           - application/vnd.com.covisint.platform.person.v1+json
+      responses:
+        '200':
+          description: Success
   /password/validate:
     post:
       description: >+
@@ -345,9 +345,6 @@ baseUriParameters: {}
 
         Parameters:
 
-      responses:
-        200:
-          description: Success
       headers:
         SolutionInstanceId:
           type: string
@@ -365,18 +362,18 @@ baseUriParameters: {}
           displayName: Content-type
           enum:
           - application/vnd.com.covisint.platform.password.validation.v1+json
+      responses:
+        '200':
+          description: Success
   /organizations/{organizationId}/securityAdmins:
     uriParameters:
       organizationId:
         type: string
-        example: null
+        example: 'null'
         required: true
         displayName: organizationId
     get:
       description: "Searches security admins according to the organization id provided.\n\nParameters:\n\norganizationId: \n\n"
-      responses:
-        200:
-          description: Success
       headers:
         Accept:
           type: string
@@ -392,6 +389,9 @@ baseUriParameters: {}
           type: string
           required: true
           displayName: pageSize
+      responses:
+        '200':
+          description: Success
   /tasks:
     /activate:
       post:
@@ -401,14 +401,14 @@ baseUriParameters: {}
 
           Parameters:
 
-        responses:
-          200:
-            description: Success
         queryParameters:
           personId:
             type: string
             required: true
             displayName: personId
+        responses:
+          '200':
+            description: Success
     /suspend:
       post:
         description: >+
@@ -417,14 +417,14 @@ baseUriParameters: {}
 
           Parameters:
 
-        responses:
-          200:
-            description: Success
         queryParameters:
           personId:
             type: string
             required: true
             displayName: personId
+        responses:
+          '200':
+            description: Success
     /unsuspend:
       post:
         description: >+
@@ -433,14 +433,14 @@ baseUriParameters: {}
 
           Parameters:
 
-        responses:
-          200:
-            description: Success
         queryParameters:
           personId:
             type: string
             required: true
             displayName: personId
+        responses:
+          '200':
+            description: Success
   get:
     description: >+
       Searches person resources according to the filter criteria provided. You have the option of searching for one or more persons by valid personIds. You may also search for persons matching specific parameters such as username, email, organization name, roleName and others.
@@ -448,9 +448,6 @@ baseUriParameters: {}
 
       Parameters:
 
-    responses:
-      200:
-        description: Success
     headers:
       Accept:
         type: string
@@ -514,6 +511,9 @@ baseUriParameters: {}
         type: string
         required: true
         displayName: isRolesGranted
+    responses:
+      '200':
+        description: Success
   post:
     description: >+
       Creates a new person in unactivated status.
@@ -521,9 +521,6 @@ baseUriParameters: {}
 
       Parameters:
 
-    responses:
-      200:
-        description: Success
     headers:
       Accept:
         type: string
@@ -536,12 +533,15 @@ baseUriParameters: {}
         displayName: Content-Type
         enum:
         - application/vnd.com.covisint.platform.person.v1+json
+    responses:
+      '200':
+        description: Success
 /personInvitations:
   /{invitationId}:
     uriParameters:
       invitationId:
         type: string
-        example: null
+        example: 'null'
         required: true
         displayName: invitationId
     /servicePackages:
@@ -550,7 +550,7 @@ baseUriParameters: {}
         uriParameters:
           packageId:
             type: string
-            example: null
+            example: 'null'
             required: true
             displayName: packageId
         /codes:
@@ -562,15 +562,15 @@ baseUriParameters: {}
 
               Parameters:
 
-            responses:
-              200:
-                description: Success
             headers:
               Accept:
                 type: string
                 example: application/vnd.com.covisint.platform.service.codes.v1+json
                 required: true
                 displayName: Accept
+            responses:
+              '200':
+                description: Success
           put:
             description: >+
               Updates the codes for a service package associated to an invitation.
@@ -578,9 +578,6 @@ baseUriParameters: {}
 
               Parameters:
 
-            responses:
-              200:
-                description: Success
             headers:
               Content-type:
                 example: application/vnd.com.covisint.platform.service.codes.v1+json
@@ -593,6 +590,9 @@ baseUriParameters: {}
                 example: application/vnd.com.covisint.platform.service.codes.v1+json
                 required: true
                 displayName: Accept
+            responses:
+              '200':
+                description: Success
           delete:
             description: >+
               Deletes the codes for a service package associated to an invitation.
@@ -601,7 +601,7 @@ baseUriParameters: {}
               Parameters:
 
             responses:
-              200:
+              '200':
                 description: Success
         put:
           description: >+
@@ -613,9 +613,6 @@ baseUriParameters: {}
 
             packageId: Unique identifier of the package
 
-          responses:
-            200:
-              description: Success
           headers:
             Content-type:
               example: application/vnd.com.covisint.platform.resourceReferences.v1+json
@@ -628,6 +625,9 @@ baseUriParameters: {}
               example: application/vnd.com.covisint.platform.resourceReferences.v1+json
               required: true
               displayName: Accept
+          responses:
+            '200':
+              description: Success
         delete:
           description: >+
             Deletes the package from being associated to the invitation.
@@ -639,7 +639,7 @@ baseUriParameters: {}
             packageId: Unique identifier of the package
 
           responses:
-            200:
+            '200':
               description: Success
       get:
         description: >+
@@ -648,15 +648,15 @@ baseUriParameters: {}
 
           Parameters:
 
-        responses:
-          200:
-            description: Success
         headers:
           Accept:
             type: string
             example: application/vnd.com.covisint.platform.resourceReferences.v1+json
             required: true
             displayName: Accept
+        responses:
+          '200':
+            description: Success
     get:
       description: >+
         Returns the person invitation by id.
@@ -667,9 +667,6 @@ baseUriParameters: {}
 
         invitationId: Unique identifier of the person invitation.
 
-      responses:
-        200:
-          description: Success
       headers:
         SolutionInstanceId:
           type: string
@@ -681,6 +678,9 @@ baseUriParameters: {}
           example: application/vnd.com.covisint.platform.person.invitation.v1+json
           required: true
           displayName: Accept
+      responses:
+        '200':
+          description: Success
   /tasks/accept:
     post:
       description: >+
@@ -689,9 +689,6 @@ baseUriParameters: {}
 
         Parameters:
 
-      responses:
-        200:
-          description: Success
       headers:
         SolutionInstanceId:
           type: string
@@ -707,6 +704,9 @@ baseUriParameters: {}
           type: string
           required: true
           displayName: createdPersonId
+      responses:
+        '200':
+          description: Success
   get:
     description: >+
       Performs a search for person invitations.
@@ -714,9 +714,6 @@ baseUriParameters: {}
 
       Parameters:
 
-    responses:
-      200:
-        description: Success
     headers:
       Accept:
         type: string
@@ -740,6 +737,9 @@ baseUriParameters: {}
         type: string
         required: true
         displayName: invitee.id
+    responses:
+      '200':
+        description: Success
   post:
     description: >+
       Creates a new person invitation.
@@ -747,9 +747,6 @@ baseUriParameters: {}
 
       Parameters:
 
-    responses:
-      200:
-        description: Success
     headers:
       Accept:
         type: string
@@ -762,12 +759,15 @@ baseUriParameters: {}
         displayName: Content-Type
         enum:
         - application/vnd.com.covisint.platform.person.invitation.v1+json
+    responses:
+      '200':
+        description: Success
 /requests:
   /{requestId}:
     uriParameters:
       requestId:
         type: string
-        example: null
+        example: 'null'
         required: true
         displayName: requestId
     get:
@@ -780,9 +780,6 @@ baseUriParameters: {}
 
         requestId: Unique identifier of the person request
 
-      responses:
-        200:
-          description: Success
       headers:
         SolutionInstanceId:
           type: string
@@ -794,6 +791,9 @@ baseUriParameters: {}
           example: application/vnd.com.covisint.platform.person.request.v1+json
           required: true
           displayName: Accept
+      responses:
+        '200':
+          description: Success
     delete:
       description: >+
         Deletes a person request.
@@ -805,7 +805,7 @@ baseUriParameters: {}
         requestId: Unique identifier of the person request
 
       responses:
-        200:
+        '200':
           description: Success
   /tasks:
     /approve:
@@ -816,9 +816,6 @@ baseUriParameters: {}
 
           Parameters:
 
-        responses:
-          200:
-            description: Success
         headers:
           Accept:
             type: string
@@ -830,6 +827,9 @@ baseUriParameters: {}
             type: string
             required: true
             displayName: requestId
+        responses:
+          '200':
+            description: Success
     /deny:
       post:
         description: >+
@@ -838,9 +838,6 @@ baseUriParameters: {}
 
           Parameters:
 
-        responses:
-          200:
-            description: Success
         headers:
           Accept:
             type: string
@@ -856,6 +853,9 @@ baseUriParameters: {}
             type: string
             required: true
             displayName: reason
+        responses:
+          '200':
+            description: Success
   get:
     description: >+
       Performs a search for person registration requests.
@@ -863,9 +863,6 @@ baseUriParameters: {}
 
       Parameters:
 
-    responses:
-      200:
-        description: Success
     headers:
       SolutionInstanceId:
         type: string
@@ -890,6 +887,9 @@ baseUriParameters: {}
         type: string
         required: true
         displayName: registrant.id
+    responses:
+      '200':
+        description: Success
   post:
     description: >+
       Creates a new person request.
@@ -897,9 +897,6 @@ baseUriParameters: {}
 
       Parameters:
 
-    responses:
-      200:
-        description: Success
     headers:
       SolutionInstanceId:
         type: string
@@ -917,3 +914,6 @@ baseUriParameters: {}
         displayName: Content-Type
         enum:
         - application/vnd.com.covisint.platform.person.request.v1+json
+    responses:
+      '200':
+        description: Success
